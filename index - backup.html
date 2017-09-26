@@ -1,0 +1,2483 @@
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://www.ajax-cross-origin.com/js/jquery.ajax-cross-origin.min.js"></script>
+<script src="https://unpkg.com/vue@2.3.4/dist/vue.js"></script>
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/score.css">
+<script src="js/data.js"></script>
+<script src="js/shortname.js"></script>
+<script src="js/score.js"></script>
+<body>
+<div class="mainContent">
+    <div class="mainMenu">
+        <ul>
+            <li class="iconMenu" onclick="openMenuSideBar();">
+                <a href="#" style="padding-bottom: 13px!important;">
+                    <i class="fa fa-bars" style="font-size: 24px;padding: 3px 6px;color: #36569B"></i></a>
+                </a>
+            </li>
+            <li>
+                <a href="#predictions" onclick="openTabMenu('content')">
+                    <span>
+                        <img src="Assets/menu_predictions@1x.png" width="30" height="32">
+                    </span>
+                    <span class="activeMenu">predictions</span>
+                    <span class="w3-tag news" style="background-color: #FF785A;">99+ New</span>
+                    <span class="w3-tag news" style="background-color: #36CC64;">99+ New</span>
+
+                    <span class="clear-fix"></span>
+                </a>
+                <hr class="activeMenu"/>
+            </li>
+            <li style="flex: 1">
+                <a href="#livescore" onclick="openTabMenu('liveScores')">
+                    <span><img src="Assets/menu_livescores@1x.png" width="32" height="22"
+                               style="margin-top: 4px;"></span>
+                    <span>live scores</span>
+                    <span class="w3-tag news" style="background-color: #36CC64;">99+ New</span>
+                    <span class="clear-fix"></span>
+                </a>
+                <hr style="width: 237px">
+            </li>
+            <li class="menuRight">
+                <a href="#predictions" onclick="openNotification('windowHelp')" class="tooltip">
+                    <span class="icon"><img src="Assets/icon_help@1x.png" width="24" height="28"
+                                            style="margin-top: 3px;"></span>
+                    <span class="txtRightMenu">help</span>
+                    <span class="tooltiptext">Help</span>
+                    <span class="clear-fix"></span>
+                </a>
+            </li>
+            <li class="menuRight" style="display:none;">
+                <a href="#predictions" onclick="openFilter();">
+                    <i class="fa fa-filter" aria-hidden="true" style="color: #577DBB;font-size: 24px"></i>
+                </a>
+            </li>
+            <li class="menuRight">
+                <a href="#predictions" onclick="openNotification('aboutUs');" class="tooltip">
+                    <span><img src="Assets/menu_aboutus@1x.png" width="32" height="32"></span>
+                    <span class="txtRightMenu">about</span>
+                    <span class="tooltiptext">About Us</span>
+                    <span class="clear-fix"></span>
+                </a>
+            </li>
+            <li class="menuRight">
+                <a href="#predictions" onclick="openLogin(this)" title="login" class="tooltip">
+                    <span><img src="Assets/menu_login@1x.png" width="29" height="32"></span>
+                    <span class="txtRightMenu">login</span>
+                    <span class="tooltiptext">Login</span>
+                    <span class="clear-fix"></span>
+                </a>
+            </li>
+            <li style="position: relative;display: none" id="inputSearch">
+                <input type="text" placeholder="Search here"
+                       style="color:#ccc;box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);border: none;height: 37px;width: 0px;">
+                <span class="clearText" onclick="clearText()"> &times</span>
+            </li>
+            <li class="menuRight" style="box-shadow: none;" onclick="btSearch(this)" title="hide">
+                <a href="#predictions" style="padding-bottom: 13px!important;" class="tooltip">
+                    <i class="material-icons" style="color: #36569B;font-size: 32px !important;">search</i>
+                    <span class="tooltiptext">Search</span>
+                </a>
+            </li>
+
+        </ul>
+        <div id="searchDiv">
+            <i class="material-icons"
+               style="color: #577DBB;margin-top: 8px;display: none;margin-left: 64px;margin-right: 15px;">keyboard_backspace</i>
+            <input type="text" placeholder="Search here"
+                   style="color:#ccc;box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);border: none;height: 37px;width: 0px;float: right">
+            <span class="clearText" onclick="clearText()"> &times</span>
+        </div>
+    </div>
+    <div class="w3-row">
+        <div id="content" class="tabMenu" style="display: flex;">
+            <div id="contentInPlayPreGame" class="w3-row" style="flex: 1">
+                <div id="center">
+                    <div class="w3-col colInPlay">
+                        <div class="headerInPlay">IN-PLAY</div>
+                        <div id="inplay">
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="inPlayButton" onclick="openPredictionMatchDetail()">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="inPlayButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="inPlayButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="inPlayButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="inPlayButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hederExpiredInPlay" style="margin-top: 10px">EXPIRED IN-PLAY</div>
+                        <div style="width: 100%;height: 100px;background-color: white;text-align: center">
+                            <span style="line-height: 6">No Expried In-Play Predictions for today</span>
+                        </div>
+                    </div>
+                    <div class="w3-col colPreGame">
+                        <div class="headerPreGame">PRE-GAME</div>
+                        <div id="pregame" >
+                            <div class="w3-row" v-for="(item,index) in preGame" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">{{ item.team_home }}</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">{{ item.score_home }}</div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">{{ item.team_away }}</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">{{ item.score_away }}
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="preGameButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="preGameButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeInPlay" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="preGameButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="hederExpiredPregame" style="margin-top: 10px">EXPIRED PRE-GAME</div>
+                        <div id="expiredpregame">
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeexpired" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:17%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeexpired" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="expiredButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-row" style="padding: 6px 5px 6px 5px">
+                                <div class="match">
+                                    <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                        <div class="w3-col timeexpired" style="width:17%">12:30</div>
+                                        <div class="w3-col" style="width:65%">Manchester United</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">1
+                                        </div>
+                                    </div>
+                                    <div class="w3-row" style="color: black;">
+                                        <div class="w3-col timeexpired" style="width:17%">Kickoff</div>
+                                        <div class="w3-col" style="width:65%">Crystal Palace</div>
+                                        <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">2
+                                        </div>
+                                    </div>
+                                    <div class="w3-row">
+                                        <button class="expiredButton">
+                                            <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                <img src="Assets/icon_tick@1x.png" width="15"
+                                                     style="margin-bottom: -4px;">
+                                            </div>
+                                            <div class="w3-col" style="width:66%;text-align: left;">
+                                                <span style="font-weight: bold">Manchester United</span>
+                                                <span>[-0.5]</span>
+                                                <span>@</span>
+                                                <span style="font-weight: bold">0.91</span>
+                                            </div>
+                                            <div class="w3-col" style="width:20%;text-align: right">
+                                                <span>-</span>
+                                                <img src="Assets/icon_clock@1x.png" width="15"
+                                                     style="margin-bottom: -4px">
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="colDetail" class="w3-col">
+                <div class="noMatch" style="width: 100%;height: 100vh;position: relative"><img src="Assets/noMatch.png"
+                                                                                               style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;">
+                </div>
+                <div id="predictionDetail" style="display: none">
+                    <div class="w3-row headerDetailLiveStream" style="background-color: #fff;height: 50px;width: 100%;">
+                        <div class="w3-col" style="width: 50%;padding-left: 12px">
+                            <button style="padding-top: 14px;border: none;background-color: #fff;cursor: pointer"
+                                    onclick="closeWindowPreDetail()">
+                                <div style="float: left;margin-right: 10px">
+                                    <i class="material-icons" style="color: #577DBB;">keyboard_backspace</i>
+                                </div>
+
+                                <div style="float: left">
+                                    <span style="color: #577DBB;font-size: 14px">BACK</span>
+                                </div>
+
+                            </button>
+                        </div>
+                        <div class="w3-col" style="width: 50%;text-align: right;padding-right: 20px;padding-top: 14px">
+                            <i class="material-icons" style="color: #577DBB;cursor: pointer"
+                               onclick="openNotification('openNewTab');">open_in_new</i>
+                        </div>
+                    </div>
+                    <div style="background-color: #4CAF50;height: 180px;">
+                        <div class="w3-row" style="height: 135px;background-color: #3f51b5;position: relative">
+                            <div class="w3-col" style="width: 50%;background-color: #9c27b0;">
+                                <img src="Assets/footballteam.jpg" width="100%" height="140">
+                                <div class="description">
+                                    <span style="padding-left: 20px">EVERTON</span>
+                                    <span style="float: right;padding-right: 8px">2</span>
+                                </div>
+                            </div>
+                            <div class="w3-col" style="width: 50%;background-color: #fff">
+                                <img src="Assets/footballteam1.jpg" width="100%" height="140">
+                                <div class="description">
+                                    <span style="float: left;padding-left: 8px">1</span>
+                                    <span style="padding-right: 20px;float: right">MAN. CITY</span>
+                                </div>
+                            </div>
+                            <div class="live">
+                                <span>LIVE</span><br>
+                                <span>'86</span>
+                            </div>
+                        </div>
+                        <div style="height: 60px;background-color: #fff; position: relative;" class="w3-card-4">
+                            <div style="padding: 0px 20px 0px 20px;position: absolute;width: 100%;">
+                                <button class="inPlayButton" style="margin-top: -27px;cursor: default !important;">
+                                    <div></div>
+                                    <div class="w3-col" style="width:66%;text-align: left;">
+                                        <span style="font-weight: bold">Manchester United</span>
+                                        <span>[-0.5]</span>
+                                        <span>@</span>
+                                        <span style="font-weight: bold">0.91</span>
+                                    </div>
+                                    <div class="w3-col" style="width:34%;text-align: right">
+                                        <span>-</span>
+                                        <img src="Assets/icon_clock@1x.png" width="15" style="margin-bottom: -4px">
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="w3-row" id="statslivestream"
+                                 style="color: #B5C0D7;font-weight: bold;font-size: 11px;margin-top: 5px;text-align: center;padding-top: 30px;cursor: pointer">
+                                <div class="w3-col activeStatsLiveStream" style="width: 50%"
+                                     onclick="openStatsLiveStream('stats',this)">
+                                    STATS
+                                </div>
+                                <div class="w3-col" style="width: 50%;"
+                                     onclick="openStatsLiveStream('livestream',this)">
+                                    LIVE STREAM
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--STATS--->
+                        <div id="stats">
+                            <div class="hederDetailInPlay" style="font-weight: normal!important;font-size: 12px">
+                                <div class="w3-row">
+                                    <div style="width: 25%;text-align: left;padding-left: 20px;text-shadow: 0px 2px 2px #888"
+                                         class="w3-col">
+                                        <span style="font-weight: bold">ODDS</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span>Handicap</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span>Home</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span>Away</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listMatchDetail" style="text-align: center;font-size: 12px">
+                                <div class="w3-row">
+                                    <div style="width: 25%; height:100%;text-align: left;padding-left: 20px"
+                                         class="w3-col">
+                                        <span style="font-weight: bold" class="timeInPlay">M8</span>
+                                    </div>
+                                    <div style="width: 25%;height:100%" class="w3-col">
+                                        <div>
+                                            <span style="color: #AEAEAE">+0.5</span>
+                                        </div>
+                                    </div>
+                                    <div style="width: 25%;height:100%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #248f24;">0.99</span>
+                                            <img class="arrow-up">
+                                        </div>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #248f24;">0.64</span>
+                                            <img class="arrow-up">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="w3-row">
+                                    <div style="width: 25%;text-align: left;padding-left: 20px" class="w3-col">
+                                        <span>SBO</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span style="color: #AEAEAE;">+0.5</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #FF9A84">-0.91</span>
+                                            <img class="arrow-down">
+                                        </div>
+
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #248f24;">0.51</span>
+                                            <img class="arrow-up">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="w3-row">
+                                    <div style="width: 25%;text-align: left;padding-left: 20px" class="w3-col">
+                                        <span>IBC</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span style="color: #AEAEAE;">+0.5</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #FF9A84">-0.91</span>
+                                            <img class="arrow-down">
+                                        </div>
+
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #FF9A84">0.51</span>
+                                            <img class="arrow-down">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hederDetailInPlay" style="font-weight: normal!important;font-size: 12px">
+                                <div class="w3-row">
+                                    <div style="width: 25%;text-align: left;padding-left: 20px;text-shadow: 0px 2px 2px #888"
+                                         class="w3-col">
+                                        <span style="font-weight: bold">OU</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span>Total Goals</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span>Over</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span>Under</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listMatchDetail" style="text-align: center;font-size: 12px">
+                                <div class="w3-row">
+                                    <div style="width: 25%; height:100%;text-align: left;padding-left: 20px"
+                                         class="w3-col">
+                                        <span style="font-weight: bold" class="timeInPlay">M8</span>
+                                    </div>
+                                    <div style="width: 25%;height:100%" class="w3-col">
+                                        <div>
+                                            <span style="color: #AEAEAE;">+0.5</span>
+                                        </div>
+                                    </div>
+                                    <div style="width: 25%;height:100%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #248f24;">0.99</span>
+                                            <img class="arrow-up">
+                                        </div>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #248f24;">0.64</span>
+                                            <img class="arrow-up">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="w3-row">
+                                    <div style="width: 25%;text-align: left;padding-left: 20px" class="w3-col">
+                                        <span>SBO</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span style="color: #AEAEAE;">+0.5</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #FF9A84">-0.91</span>
+                                            <img class="arrow-down">
+                                        </div>
+
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #248f24;">0.51</span>
+                                            <img class="arrow-up">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="w3-row">
+                                    <div style="width: 25%;text-align: left;padding-left: 20px" class="w3-col">
+                                        <span>IBC</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <span style="color: #AEAEAE;">+0.5</span>
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #FF9A84">-0.91</span>
+                                            <img class="arrow-down">
+                                        </div>
+
+                                    </div>
+                                    <div style="width: 25%" class="w3-col">
+                                        <div class="homeAway">
+                                            <span style="color: #FF9A84">0.51</span>
+                                            <img class="arrow-down">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Live Stream-->
+                        <div id="livestream" style="display: none;">
+                            fdfd
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mask"></div>
+        </div>
+        <div id="liveScores">
+            <div style="width: 100%">
+                <div style="background-color: #aaa;height: 60px;width: 100%;text-align:center;line-height: 3;font-size: 20px;font-weight: bold">
+                    {{calendar}}
+                </div>
+                <div id="contentLiveScores" class="w3-row" style="flex: 1">
+
+                    <div id="centerLiveScores">
+                        <div class="w3-col colInPlay">
+                            <div class="headerLiveScores">
+                                <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
+                                <span>International-Club Friendlies</span>
+                            </div>
+                            <div class="listlivescores" style="background-color: #fff">
+                                <ul style="list-style: none;padding: 0px;margin: 0px">
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Manchester
+                                                    United
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Arsenal</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    0
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    10:15
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">4
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li onclick="openLiveScoresDetail()">
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:20%;text-align: center;color: #36CC64">
+                                                    '86
+                                                </div>
+                                                <div class="w3-col" style="width:70%;font-size: 12px;color: #38619E">
+                                                    Manchester United
+                                                </div>
+                                                <div class="w3-col"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #36CC64;font-size: 12px">
+                                                    LIVE
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">
+                                                    Arsenal
+                                                </div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="headerLiveScores" style="margin-top: 5px">
+                                <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
+                                <span>International-Club Friendlies</span>
+                            </div>
+                            <div class="listlivescores" style="background-color: #fff">
+                                <ul style="list-style: none;padding: 0px;margin: 0px">
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Manchester
+                                                    United
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Arsenal</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    0
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    10:15
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">4
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li onclick="openLiveScoresDetail()">
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:20%;text-align: center;color: #36CC64">
+                                                    '86
+                                                </div>
+                                                <div class="w3-col" style="width:70%;font-size: 12px;color: #38619E">
+                                                    Manchester United
+                                                </div>
+                                                <div class="w3-col"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #36CC64;font-size: 12px">
+                                                    LIVE
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">
+                                                    Arsenal
+                                                </div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="w3-col colPreGame">
+                            <div class="headerLiveScores">
+                                <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
+                                <span>International-Club Friendlies</span>
+                            </div>
+                            <div class="listlivescores" style="background-color: #fff">
+                                <ul style="list-style: none;padding: 0px;margin: 0px">
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Manchester
+                                                    United
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Arsenal</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    0
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    10:15
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">4
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li onclick="openLiveScoresDetail()">
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:20%;text-align: center;color: #36CC64">
+                                                    '86
+                                                </div>
+                                                <div class="w3-col" style="width:70%;font-size: 12px;color: #38619E">
+                                                    Manchester United
+                                                </div>
+                                                <div class="w3-col"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #36CC64;font-size: 12px">
+                                                    LIVE
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">
+                                                    Arsenal
+                                                </div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="headerLiveScores" style="margin-top: 5px">
+                                <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
+                                <span>International-Club Friendlies</span>
+                            </div>
+                            <div class="listlivescores" style="background-color: #fff">
+                                <ul style="list-style: none;padding: 0px;margin: 0px">
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Manchester
+                                                    United
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Arsenal</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    4:00
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px">
+                                                    0
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">
+                                                    10:15
+                                                </div>
+                                                <div class="w3-col liveScoreTextBold" style="width:70%;">Liverpool</div>
+                                                <div class="w3-col liveScoreTextBold"
+                                                     style="width:10%;text-align: right;padding-right: 10px">4
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                                    FT
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%">Newcastle</div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li onclick="openLiveScoresDetail()">
+                                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:20%;text-align: center;color: #36CC64">
+                                                    '86
+                                                </div>
+                                                <div class="w3-col" style="width:70%;font-size: 12px;color: #38619E">
+                                                    Manchester United
+                                                </div>
+                                                <div class="w3-col"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    3
+                                                </div>
+                                            </div>
+                                            <div class="w3-row" style="color: black;">
+                                                <div class="w3-col"
+                                                     style="width:20%;text-align: center;color: #36CC64;font-size: 12px">
+                                                    LIVE
+                                                </div>
+                                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">
+                                                    Arsenal
+                                                </div>
+                                                <div class="w3-col liveScoreText"
+                                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                                    1
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="colDetailLiveScores" class="w3-col" style="background-color: #fff;">
+                <div class="noMatch" style="width: 100%;height: 100vh;position: relative"><img src="Assets/noMatch.png"
+                                                                                               style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;">
+                </div>
+
+                <div id="windowLiveScoresDetail" class="bgMenuSideBar" style="display: none">
+
+
+                    <div>
+                        <div class="w3-row headerDetailLiveStream"
+                             style="background-color: #fff;height: 50px;width: 100%">
+                            <div class="w3-col" style="width: 50%;padding-left: 12px">
+                                <button style="padding-top: 14px;border: none;background-color: #fff;cursor: pointer"
+                                        onclick="closeWindowLiveScoresDetail('windowLiveScoresDetail')">
+                                    <div style="float: left;margin-right: 10px">
+                                        <i class="material-icons" style="color: #577DBB;">keyboard_backspace</i>
+                                    </div>
+
+                                    <div style="float: left">
+                                        <span style="color: #577DBB;font-size: 14px">BACK</span>
+                                    </div>
+
+                                </button>
+                            </div>
+                            <div class="w3-col"
+                                 style="width: 50%;text-align: right;padding-right: 20px;padding-top: 14px">
+                                <i class="material-icons" style="color: #577DBB;cursor: pointer"
+                                   onclick="openNotification('openNewTab');">open_in_new</i>
+                            </div>
+                        </div>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px;background-color: #fff">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;padding-left: 22px;color: #36CC64">
+                                    '86
+                                </div>
+                                <div class="w3-col" style="width:70%;color: #38619E">Manchester United
+                                </div>
+                                <div class="w3-col"
+                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;">
+                                    3
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;padding-left: 22px;color: #36CC64;">
+                                    LIVE
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">Arsenal</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--style="max-height: calc(100vh - 107px);overflow: auto"-->
+                    <div class="liveStreamDetail">
+                        <div class="w3-row"
+                             style="background-color: #fff;border-top: 1px solid #EBEBEB;padding-left: 22px;padding-right: 22px;padding-top: 10px">
+                            <div class="w3-row" style="height: 35px">
+                                <div class="w3-col" style="width: 50%;color: #C5C5C5"><span>Kickoff</span></div>
+                                <div class="w3-col" style="width: 50%;text-align: right;color:#616161">
+                                    <span>12:35 AM</span></div>
+                            </div>
+                            <div class="w3-row" style="height: 35px">
+                                <div class="w3-col" style="width: 50%;color: #C5C5C5"><span>League</span></div>
+                                <div class="w3-col" style="width: 50%;text-align: right;color:#616161 ">
+                                    <span>English Premier League</span></div>
+                            </div>
+                        </div>
+                        <div class="w3-row"
+                             style="text-align: center;text-shadow: 1px 1px 4px #000;color: #fff;height: 53px">
+                            <div class="w3-col"
+                                 style="width: 25%;font-size: 12px;text-align: left;padding-left: 20px;padding-top: 19px">
+                                <span>HOME</span></div>
+                            <div class="w3-col" style="width: 50%;font-size: 16px;font-weight: 600;padding-top: 15px">
+                                <span>STATS</span></div>
+                            <div class="w3-col"
+                                 style="width: 25%;text-align: right;padding-right: 20px;font-size: 12px;padding-top: 19px">
+                                <span>AWAY</span></div>
+                        </div>
+                        <div id="statsDetail">
+                            <ul>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
+                                            <span>27</span></div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawLeftLine" width="30%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:20%;color:#C5C5C5;line-height: 3;text-align: center">Shots
+                                        </div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawRightLine" width="25%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            24
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
+                                            <span>15</span></div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawLeftLine" width="80%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:20%;color:#C5C5C5;line-height: 3;text-align: center">On
+                                            Target
+                                        </div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawRightLine" width="15%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            21
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
+                                            <span>12</span></div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawLeftLine" width="12%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:20%;color:#C5C5C5;line-height: 3;text-align: center">Off
+                                            Target
+                                        </div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawRightLine" width="15%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            3
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
+                                            <span>3</span></div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawLeftLine" width="80%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:20%;color:#C5C5C5;line-height: 3;text-align: center">Corner
+                                            Kicks
+                                        </div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawRightLine" width="9%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            -
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
+                                            <span>3</span></div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawLeftLine" width="10%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:20%;color:#C5C5C5;line-height: 3;text-align: center">Yellow
+                                            Cards
+                                        </div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawRightLine" width="85%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            -
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
+                                            <span>3</span></div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawLeftLine" width="25%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:20%;color:#C5C5C5;line-height: 3;text-align: center">Red
+                                            Cards
+                                        </div>
+                                        <div class="w3-col" style="width:35%;">
+                                            <hr class="drawRightLine" width="9%">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            5
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="w3-row"
+                             style="text-align: center;text-shadow: 1px 1px 4px #000;color: #fff;height: 53px">
+                            <div class="w3-col"
+                                 style="width: 25%;font-size: 12px;text-align: left;padding-left: 20px;padding-top: 19px">
+                                <span>HOME</span></div>
+                            <div class="w3-col" style="width: 50%;font-size: 16px;font-weight: 600;padding-top: 15px">
+                                <span>TIMELINE</span></div>
+                            <div class="w3-col"
+                                 style="width: 25%;text-align: right;padding-right: 20px;font-size: 12px;padding-top: 19px">
+                                <span>AWAY</span></div>
+                        </div>
+                        <div id="timeLineDetail">
+                            <ul>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:10%;color: #616161;line-height: 3;padding-left: 10px;">
+                                            <img src="Assets/menu_aboutus@1x.png"></div>
+                                        <div class="w3-col" style="width:35%;line-height: 3">
+                                            <span>Ricardo Quaresma</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;color:#C5C5C5;line-height: 3;text-align: center">'86
+                                        </div>
+                                        <div class="w3-col" style="width:35%;text-align: right">
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:10%;color: #616161;line-height: 3;padding-left: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png"></div>
+                                        <div class="w3-col" style="width:35%;line-height: 3">
+                                            <span>Hector Moreno</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;color:#C5C5C5;line-height: 3;text-align: center">'86
+                                        </div>
+                                        <div class="w3-col" style="width:35%;line-height: 3;text-align: right">
+                                            <span>Javier Hernadesz</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:10%;color: #616161;line-height: 3;padding-left: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png"></div>
+                                        <div class="w3-col" style="width:35%;line-height: 3">
+                                            <span>Hector Moreno</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;color:#C5C5C5;line-height: 3;text-align: center">'86
+                                        </div>
+                                        <div class="w3-col" style="width:35%;line-height: 3;text-align: right">
+                                            <span>Javier Hernadesz</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:10%;color: #616161;line-height: 3;padding-left: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png"></div>
+                                        <div class="w3-col" style="width:35%;line-height: 3">
+                                            <span>Hector Moreno</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;color:#C5C5C5;line-height: 3;text-align: center">'86
+                                        </div>
+                                        <div class="w3-col" style="width:35%;line-height: 3;text-align: right">
+                                            <span>Javier Hernadesz</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:10%;color: #616161;line-height: 3;padding-left: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png"></div>
+                                        <div class="w3-col" style="width:35%;line-height: 3">
+                                            <span>Hector Moreno</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;color:#C5C5C5;line-height: 3;text-align: center">'86
+                                        </div>
+                                        <div class="w3-col" style="width:35%;line-height: 3;text-align: right">
+                                            <span>Javier Hernadesz</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3-row">
+                                        <div class="w3-col"
+                                             style="width:10%;color: #616161;line-height: 3;padding-left: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png"></div>
+                                        <div class="w3-col" style="width:35%;line-height: 3">
+                                            <span>Hector Moreno</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;color:#C5C5C5;line-height: 3;text-align: center">'86
+                                        </div>
+                                        <div class="w3-col" style="width:35%;line-height: 3;text-align: right">
+                                            <span>Javier Hernadesz</span>
+                                        </div>
+                                        <div class="w3-col"
+                                             style="width:10%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;padding-top: 7px">
+                                            <img src="Assets/menu_aboutus@1x.png">
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="w3-row"
+                             style="text-align: center;text-shadow: 1px 1px 4px #000;color: #fff;height: 53px">
+                            <div class="w3-col" style="width: 100%;font-size: 16px;font-weight: 600;padding-top: 15px">
+                                <span>LIVESTREAM</span></div>
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="Assets/football_ground.png">
+                        </div>
+                        <div class="w3-row"
+                             style="background-color: #fff;height: 70px;width: 100%;padding-top: 11px;padding-left: 20px;"
+                             onclick="openNotification('openNewTab')">
+                            <div class="w3-col" style=" width: 80%">
+                                <span style="font-weight: 600;font-size: 16px;color: #616161">Watch Live Stream</span><br>
+                                <span style="color: #C5C5C5">This will open in new tab</span>
+                            </div>
+                            <div class="w3-col"
+                                 style="width: 20%;text-align: right;padding-top: 10px;padding-left: 20px">
+                                <img src="Assets/play.png">
+                            </div>
+                        </div>
+                        <div style="height: 70px; text-align: center;padding-top: 22px; color: #8B9EC6;">
+                            <span>Made by AMSB. All Right Reserved. &copy; 2017.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mask"></div>
+        </div>
+        <!--<div id="liveScores">
+            <div class="headerLiveScores">
+                <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
+                <span>International-Club Friendlies</span>
+            </div>
+            <div class="listlivescores" style="background-color: #fff">
+                <ul style="list-style: none;padding: 0px;margin: 0px">
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">4:00</div>
+                                <div class="w3-col liveScoreTextBold" style="width:70%;">Manchester United</div>
+                                <div class="w3-col liveScoreTextBold"
+                                     style="width:10%;text-align: right;padding-right: 10px">3
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                    FT
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%">Arsenal</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">4:00</div>
+                                <div class="w3-col liveScoreText" style="width:70%;">Liverpool</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px">
+                                    0
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                    FT
+                                </div>
+                                <div class="w3-col liveScoreTextBold" style="width:70%">Newcastle</div>
+                                <div class="w3-col liveScoreTextBold"
+                                     style="width:10%;text-align: right;padding-right: 10px">1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">10:15</div>
+                                <div class="w3-col liveScoreTextBold" style="width:70%;">Liverpool</div>
+                                <div class="w3-col liveScoreTextBold"
+                                     style="width:10%;text-align: right;padding-right: 10px">4
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                    FT
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%">Newcastle</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px;">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li onclick="openLiveScoresDetail()">
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center;color: #36CC64">
+                                    '86
+                                </div>
+                                <div class="w3-col" style="width:70%;font-size: 12px;color: #38619E">Manchester United
+                                </div>
+                                <div class="w3-col"
+                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                    3
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #36CC64;font-size: 12px">
+                                    LIVE
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">Arsenal</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="headerLiveScores">
+                <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
+                <span>International-Club Friendlies</span>
+            </div>
+            <div class="listlivescores" style="background-color: #fff">
+                <ul style="list-style: none;padding: 0px;margin: 0px">
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">4:00</div>
+                                <div class="w3-col liveScoreTextBold" style="width:70%;">Manchester United</div>
+                                <div class="w3-col liveScoreTextBold"
+                                     style="width:10%;text-align: right;padding-right: 10px">3
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                    FT
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%">Arsenal</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">4:00</div>
+                                <div class="w3-col liveScoreText" style="width:70%;">Liverpool</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px">
+                                    0
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                    FT
+                                </div>
+                                <div class="w3-col liveScoreTextBold" style="width:70%">Newcastle</div>
+                                <div class="w3-col liveScoreTextBold"
+                                     style="width:10%;text-align: right;padding-right: 10px">1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">10:15</div>
+                                <div class="w3-col liveScoreTextBold" style="width:70%;">Liverpool</div>
+                                <div class="w3-col liveScoreTextBold"
+                                     style="width:10%;text-align: right;padding-right: 10px">4
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                    FT
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%">Newcastle</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px;">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center;color: #36CC64">
+                                    '86
+                                </div>
+                                <div class="w3-col" style="width:70%;font-size: 12px;color: #38619E">Manchester United
+                                </div>
+                                <div class="w3-col"
+                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                    3
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #36CC64;font-size: 12px">
+                                    LIVE
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">Arsenal</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px;color: #38619E;font-size: 12px">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3-row" style="padding: 5px 10px 5px 0px">
+                            <div class="w3-row" style="color: black;padding-bottom: 3px;">
+                                <div class="w3-col liveScoreText" style="width:20%;text-align: center">10:15</div>
+                                <div class="w3-col liveScoreTextBold" style="width:70%;">Liverpool</div>
+                                <div class="w3-col liveScoreTextBold"
+                                     style="width:10%;text-align: right;padding-right: 10px">4
+                                </div>
+                            </div>
+                            <div class="w3-row" style="color: black;">
+                                <div class="w3-col" style="width:20%;text-align: center;color: #38619E;font-size: 12px">
+                                    FT
+                                </div>
+                                <div class="w3-col liveScoreText" style="width:70%">Newcastle</div>
+                                <div class="w3-col liveScoreText"
+                                     style="width:10%;text-align: right;padding-right: 10px;">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>-->
+    </div>
+
+    <div id="windowLogin" onclick="closeNotification('windowLogin');">
+        <div id="login" class="w3-animate-left bgMenuSideBar">
+            <div style="position: relative;margin-bottom: 15px;background-color: #fff;box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.1);">
+                <img src="Assets/logo@1x.png" width="293" height="92" style="margin-top: 22px">
+                <a class="btnClose" onclick="closeLogin();">&times</a>
+            </div>
+            <div class="titleLogin">
+                <span>LOGIN TO YOUR ACCOUNT</span>
+            </div>
+            <div id="loginRules">
+                <ul>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/icon_login_notification.png" class="w3-left w3-circle w3-margin-right"
+                                 style="width:50px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Instant Notifications</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Get notified about updates to match statistics or predicted outcomes with in-browser
+                                notifications!
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/icon_login_credits.png" class="w3-left w3-circle w3-margin-right"
+                                 style="width:50px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Get Prediction Credits!</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Manage your Prediction Credits balance and get the insights you need on the latest
+                                matches!
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/icon_login_sync.png" class="w3-left w3-circle w3-margin-right"
+                                 style="width:50px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Keep settings synced across devices</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Login and access the ScoreWatch system from multiple devices, and keep all your settings
+                                & preferences in sync!
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="text-align: center;padding: 40px" id="groupButtonLogin">
+                <button class="w3-button" onclick="loginFaceBook()"
+                        style="background-color: #fff;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%;margin-bottom: 15px">
+                    <div style="float: left;padding-top: 6px;color:#3C5A98;"><span>LOGIN WITH FACEBOOK</span></div>
+                    <div style="float: right">
+                        <img src="Assets/icon_fb.png">
+                    </div>
+                </button>
+                <button onclick="loginGoogle()" class="w3-button"
+                        style="background-color: #fff;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%">
+                    <div style="float: left;padding-top: 6px;color: #DE584C"><span>LOGIN WITH GOOGLE</span></div>
+                    <div style="float: right">
+                        <img src="Assets/icon_google.png">
+                    </div>
+                </button>
+            </div>
+            <div class="footerLogin">
+                <span>We don't post to social media without your consent</span><br>
+                <span>Red our <a href="https://www.google.com.vn" target="_blank"
+                                 style="text-decoration: none;border-bottom: 2px solid #C2CCE1">Privacy Policy here</a></span>
+            </div>
+
+        </div>
+    </div>
+    <div id="windowHelp" onclick="closeNotification('windowHelp');">
+        <div id="help">
+            <div style="width: 100%;border-bottom: 2px solid #F0F0F0;">
+                <div style="display: grid;text-align: center;padding: 10px 20px 0px 20px;width: 320px;margin: auto;">
+                    <span style="font-size: 14px;color: #666;font-weight: bold;margin-bottom: 10px">HOW PREDICTIONS WORK</span>
+                    <span style="font-size: 12px;color: #A6A6A6;margin-bottom: 12px">Some basics on what the terminology being used is, and how it all fits together. Short blurb here</span>
+                </div>
+            </div>
+            <div class="itemHelp" style="width: 100%;height: 352px;background-color: #fff;overflow: auto">
+                <ul style="list-style: none;padding-left: 20px;padding-right: 20px">
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/img_account.png" class="w3-left w3-round w3-margin-right"
+                                 style="width:80px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Some Heading Here</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Some basics on what the terminology being used is, and how it all fits together.This
+                                can be broken into points or be a large chunk, depending on the topic it can also be
+                                done
+                                entirely visually
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/img_account.png" class="w3-left w3-round w3-margin-right"
+                                 style="width:80px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Some Heading Here</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Some basics on what the terminology being used is, and how it all fits together.This
+                                can be broken into points or be a large chunk, depending on the topic it can also be
+                                done
+                                entirely visually</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/img_account.png" class="w3-left w3-round w3-margin-right"
+                                 style="width:80px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Some Heading Here</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Some basics on what the terminology being used is, and how it all fits together.This
+                                can be broken into points or be a large chunk, depending on the topic it can also be
+                                done
+                                entirely visually</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/img_account.png" class="w3-left w3-round w3-margin-right"
+                                 style="width:80px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Some Heading Here</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Some basics on what the terminology being used is, and how it all fits together.This
+                                can be broken into points or be a large chunk, depending on the topic it can also be
+                                done
+                                entirely visually
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/img_account.png" class="w3-left w3-round w3-margin-right"
+                                 style="width:80px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Some Heading Here</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Some basics on what the terminology being used is, and how it all fits together.This
+                                can be broken into points or be a large chunk, depending on the topic it can also be
+                                done
+                                entirely visually</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display: table-cell;vertical-align: middle">
+                            <img src="Assets/img_account.png" class="w3-left w3-round w3-margin-right"
+                                 style="width:80px">
+                        </div>
+                        <div style="display: table-cell">
+                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Some Heading Here</span>
+                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                                Some basics on what the terminology being used is, and how it all fits together.This
+                                can be broken into points or be a large chunk, depending on the topic it can also be
+                                done
+                                entirely visually
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="background-color: #fff;box-shadow: 0 -10px 9px rgba(0,0,0, .1);position: absolute;bottom: 0;width: 100%;border-radius:4px;height: 60px">
+                <button onclick="closeNotification('windowHelp');" class="w3-button"
+                        style="width: 100%;height: 100%;font-size: 11px;font-weight: bold;border-radius: 4px;color: #577DBB">
+                    OK,GOT IT
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="openNewTab"
+         style="padding-right:10px;padding-left:10px;background-color:rgba(0,0,0, .5);display: none;width: 100%;top:0;z-index: 3"
+         class="w3-sidebar w3-animate-left">
+        <div style="background-color: #fff;height: 181px;max-width: 480px;min-width:320px;position: absolute;top:0;right:0;bottom: 0;left: 0;margin: auto;border-radius: 4px;">
+            <div style="padding: 18px;padding-bottom: 0px">
+                <span style="font-size: 13px;color: #666;font-weight: bold;">OPEN IN NEW TAB ?</span><br>
+                <p style="font-size: 12px;color: #A6A6A6;">This will open the link in New Tab. Please make sure that
+                    popups are enabled.</p>
+            </div>
+            <div style="padding-left: 18px;color:#A6A6A6 ; padding-bottom: 20px;">
+                <input class="w3-check" type="checkbox" style="width: 20px;height: 20px"> Don't ask me again<br>
+            </div>
+            <div class="w3-row" style="border-top: 1px solid #F0F0F0;height: 51px">
+                <div class="w3-col" style="width: 50%;height:100%;border-right: 1px solid #F0F0F0">
+                    <button onclick="closeNotification('openNewTab');"
+                            style="width: 100%;height: 100%;font-size: 12px;border-radius: 4px;color: #848484;border: none;background-color: #fff">
+                        DON'T OPEN
+                    </button>
+                </div>
+                <div class="w3-col" style="width: 50%;height:100%;">
+                    <button onclick="closeNotification('openNewTab');"
+                            style="width: 100%;height: 100%;font-size: 12px;border-radius: 4px;color: #577DBB;border: none;background-color: #fff">
+                        YES,OPEN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="aboutUs" onclick="closeNotification('aboutUs');">
+        <div class="windowAboutUs">
+            <div style="box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.1);margin-bottom: 15px">
+                <img src="Assets/logo@1x.png" width="293" height="92" style="margin-top: 22px">
+                <a class="btnClose" onclick="closeNotification('aboutUs');">&times</a>
+            </div>
+            <div class="aboutContent">
+                <div class="aboutItems">
+                    <div class="iconAbout" style="position: relative">
+                        <img src="Assets/about_syndication@1x.png" width="290">
+                        <div style="top: 106px">
+                            <span>Syndication</span>
+                        </div>
+                    </div>
+                    <div class="textAbout">
+                        <span style="color:#AFAFAF">
+                        Leveraging the many networks and existing connections that already exist in the world of football-related live scores, news & predictions!
+                        Built upon reliable networks that are totally immersed in the scene from the underground tips to the backroom insights, all collected and refined through a reliable mechanism that has been the cornerstone of competitive odds
+                        </span>
+                    </div>
+                    <div class="learnMore" onclick="learMore(this)">
+                        <span>LEARN MORE</span>
+                        <div style="background-color: black"></div>
+                    </div>
+                </div>
+                <div class="aboutItems">
+                    <div class="iconAbout" style="position: relative">
+                        <img src="Assets/about_ai@1x.png" width="290">
+                        <div style="top: 119px">
+                            <span>Advanced A.I</span>
+                        </div>
+                    </div>
+                    <div class="textAbout">
+                        <span style="color:#AFAFAF">
+                            Building the systems of tomorrow, that make use of the many advances in Artificial Intelligence, for faster, more accurate information!
+                            We make use of the latest, most powerful and accurate AI systems that have ever been put to use with sports information. This gives us the ability to send a large amount of data to the servers, and compute with great accuracy the likely results!
+
+                        </span>
+                    </div>
+                    <div class="learnMore" onclick="learMore(this)">
+                        <span>LEARN MORE</span>
+                    </div>
+
+                </div>
+                <div class="aboutItems" style="margin-bottom: 0px !important;">
+                    <div class="iconAbout" style="position: relative">
+                        <img src="Assets/about_professionals@1x.png" width="290">
+                        <div style="top:119px">
+                            <span>Independent Professionals</span>
+                        </div>
+                    </div>
+                    <div class="textAbout">
+                        <span style="color:#AFAFAF">
+                        Stay ahead of the game with collected insights, information and knowledge from our network of independent professionals!
+                        With the flexibility of automation, it is possible for us to gather data from a large selection of individual tipsters, which gives access to the bigger picture, the reasoning and the likelihoods behind different odds available on the market at any time!
+                        </span>
+                    </div>
+                    <div class="learnMore" onclick="learMore(this)">
+                        <span>LEARN MORE</span>
+                        <div></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="filterId" onclick="closeNotification('filterId');" class=" w3-animate-top">
+        <div style="background-color: #fff;">
+            <div class="w3-row" style="padding: 20px 20px 10px 20px">
+                <div class="w3-col" style="width:50%;">
+                    <span style="color: #6F85B7;font-size: 14px">League</span>
+                </div>
+                <div class="w3-col" style="width:50%;text-align: right">
+                    <select style="width: 56px;border: none;border-bottom: 2px solid #6F85B7;color: #6F85B7">
+                        <option value="volvo">ALL</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w3-row" style="padding: 20px 20px 10px 20px">
+                <div class="w3-col" style="width:50%;">
+                    <span style="color: #6F85B7;font-size: 14px">Team</span>
+                </div>
+                <div class="w3-col" style="width:50%;text-align: right">
+                    <select style="width: 56px;border: none;border-bottom: 2px solid #6F85B7;color: #6F85B7">
+                        <option value="volvo">ALL</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w3-row" style="padding: 20px 20px 18px 20px;border-bottom: 1px solid #C5C5C5">
+                <div class="w3-col" style="width:50%;">
+                    <span style="color: #6F85B7;font-size: 14px">Live Only</span>
+                </div>
+                <div class="w3-col" style="width:50%;text-align: right">
+                    <i class="fa fa-toggle-on" style="font-size:24px;color: #C5C5C5"></i>
+                </div>
+            </div>
+            <div class="w3-row" style="padding: 20px;">
+                <div class="w3-col" style="width:50%;display:grid">
+                    <span style="color: #6F85B7;font-size: 14px;font-weight: bold">FILTERS</span>
+                    <span style="color: #6F85B7;font-size: 12px">Tap to close</span>
+                </div>
+                <div class="w3-col" style="width:50%;text-align: right;color: #fff">
+                    <button class="w3-button" style="background-color: #FF785A;border-radius: 18px">RESET</button>
+                    <button onclick="closeNotification('filterId')" class="w3-button"
+                            style="background-color: #36CC64;border-radius: 18px">
+                        APPLY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" style="text-align: center; font-weight: bold;line-height: 5;">
+        <span>FOOTER</span>
+    </div>
+</div>
+
+
+<div id="logout" class="w3-animate-top">
+    <div style="background-color: #fff;height: 156px;min-width: 320px;max-width:337px;position: absolute;top:0;right:0;bottom: 0;left: 0;margin: auto;border-radius: 4px;">
+        <div style="padding: 18px;padding-bottom: 3px">
+            <span style="font-size: 14px;color: #666;font-weight: bold;display: inline-block;height: 23px">ARE YOU SURE?</span><br>
+            <p style="font-size: 12px;color: #A6A6A6;">This will log you out from this device. To see all
+                available Predictions, you'll have to login again.</p>
+        </div>
+        <div class="w3-row" style="border-top: 1px solid #F0F0F0;height: 51px">
+            <div class="w3-col" style="width: 50%;height:100%;border-right: 1px solid #F0F0F0">
+                <button class="w3-button" onclick="closeNotification('logout');"
+                        style="width: 100%;height: 100%;font-size: 12px;border-radius: 4px;color: #577DBB">
+                    NO, STAY
+                </button>
+            </div>
+            <div class="w3-col" style="width: 50%;height:100%;">
+                <button class="w3-button" onclick="logout();"
+                        style="width: 100%;height: 100%;font-size: 12px;border-radius: 4px;color: #848484">
+                    YES, LOGOUT
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="account" class="w3-animate-left bgMenuSideBar">
+    <div style="height: 130px;width: 100%">
+        <div class="w3-row" style="padding-left: 15px;padding-top: 15px;display: flex">
+            <div class="w3-col" style="width: 50px">
+                <a href="#" style="padding-bottom: 13px!important;" onclick="closeAccount()">
+                    <i class="fa fa-bars" style="font-size: 24px;padding: 3px 6px;color: #fff"></i>
+                </a>
+            </div>
+            <div class="w3-col" style="width: 80%;width: 80%;font-size: 20px;font-weight: 500;color: #fff;">
+                <span>MY ACCOUNT</span>
+            </div>
+            <div class="w3-col" style="width: auto;color: #fff;padding-right: 15px">
+                <a href="#" style="padding-bottom: 13px!important;">
+                    <i class="material-icons">more_vert</i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;height: auto;background-color: #fff;padding-top: 100px;" class="w3-card-4">
+        <div class="avatarAccount">
+            <img src="Assets/img_account.png" class="w3-circle w3-card-4" width="130"
+                 style=" border: 4px solid #5376C0;">
+            <div style="padding-top: 13px;color: #36569B;font-weight: 600;">
+                <span>LEE AMY RYAN</span>
+            </div>
+        </div>
+        <div class="membership">
+            <ul>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="color: #C5CEE2;">Membership</span>
+                    </div>
+                    <div style="float: right;padding-top: 9px;text-align: right">
+                        <span style="font-size: 16px;font-weight: 600;color: #7188B9;">Unlimited (Trial)</span><br>
+                        <span style="font-size: 12px;color: #C5CEE2;">Valid till 30-Nov, '17</span>
+                    </div>
+                </li>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="color: #C5CEE2;">Member since</span>
+                    </div>
+                    <div style="float: right;padding-top: 9px;text-align: right">
+                        <span style="font-size: 16px;font-weight: 600;color: #7188B9;">22-Aug, '17</span><br>
+                        <span style="font-size: 12px;color: #C5CEE2;">100 days</span>
+                    </div>
+                </li>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="color: #C5CEE2;">Transaction History</span>
+                    </div>
+                    <div style="float: right;line-height: 5">
+                        <a href="#" onclick="openTransaction()">
+                            <i class="material-icons" style="font-size:29px;color: #617AB0 ">expand_more</i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="background-color: #fff;text-align: center;padding-top: 20px;padding-bottom: 10px;bottom: 0;position: absolute;width: 100%">
+        <button onclick="openUpgrade()"
+                style="background-image: url('Assets/bt_upgrade.jpg');cursor:pointer;border: none;border-radius: 4px;height: 48px;width: 220px;color: #fff;font-weight: bold;font-size: 14px">
+            UPGRADE MY ACCOUNT
+        </button>
+        <div style="margin: auto; margin-top: 20px;color: #F9CCC3;font-size: 12px;">
+            <span>Get access to more predictions and make the most of your ScoreWatch membership!</span>
+        </div>
+    </div>
+</div>
+<div id="upgrade" class="w3-animate-left bgMenuSideBar">
+    <div style="height: 130px;width: 100%">
+        <div class="w3-row" style="padding-left: 15px;padding-top: 15px;display: flex">
+            <div class="w3-col" style="width: 50px;padding-top: 3px">
+                <a href="#" onclick="closeUpgrade()">
+                    <i class="material-icons" style="color: #fff">arrow_back</i>
+                </a>
+            </div>
+            <div class="w3-col" style="width: 80%;width: 80%;font-size: 20px;font-weight: 500;color: #fff;">
+                <span>UPGRADE ACCOUNT</span>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;height: auto;background-color: #fff;padding-top: 100px;" class="w3-card-4">
+        <div class="avatarAccount">
+            <img src="Assets/img_account.png" class="w3-circle w3-card-4" width="130"
+                 style=" border: 4px solid #5376C0;">
+            <div style="padding-top: 13px;color: #36569B;font-weight: 600;">
+                <span>LEE AMY RYAN</span>
+            </div>
+        </div>
+        <div class="membership">
+            <ul>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="color: #C5CEE2;">Membership</span>
+                    </div>
+                    <div style="float: right;padding-top: 19px;text-align: right">
+                        <span style="font-size: 16px;font-weight: 600;color: #7188B9;">Unlimited (Trial)</span>
+                    </div>
+                </li>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="color: #C5CEE2;">Valid Till</span>
+                    </div>
+                    <div style="float: right;padding-top: 19px;text-align: right">
+                        <span style="font-size: 16px;font-weight: 600;color: #7188B9;">22-Aug, '17</span>
+                    </div>
+                </li>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="color: #C5CEE2;">Some field</span>
+                    </div>
+                    <div style="float: right;line-height: 4">
+                        <span style="font-size: 16px;font-weight: 600;color: #7188B9;">Some Data</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="width: 100%;height: 56px;text-align: center;color: #fff">
+        <span style="font-weight: 500;text-shadow: 1px 1px 4px #000;font-size: 22px">ADD PREDICTION CREDITS</span><br>
+        <span style="font-size: 12px;color: #889CC6;">Credits can be redeemed for Predictions!</span>
+    </div>
+    <div class="credits w3-card-4">
+        <ul>
+            <li>
+                <div class="w3-row">
+                    <div class="w3-col" style="width: 50%;padding-top: 25px">
+                        <span style="color: #7188B9;">10 Credits</span>
+                    </div>
+                    <div class="w3-col" style="width: 50%;text-align: right;padding-right: 20px;padding-top: 15px">
+                        <button style="background-image: url('Assets/bt_upgrade.jpg');border: none;border-radius: 4px;height: 40px;width: 100px;color: #fff;font-weight: bold;font-size: 14px">
+                            RM 50
+                        </button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w3-row">
+                    <div class="w3-col" style="width: 50%;padding-top: 25px">
+                        <span style="color: #7188B9;">25 Credits</span>
+                    </div>
+                    <div class="w3-col" style="width: 50%;text-align: right;padding-right: 20px;padding-top: 15px">
+                        <button style="background-image: url('Assets/bt_upgrade.jpg');border: none;border-radius: 4px;height: 40px;width: 100px;color: #fff;font-weight: bold;font-size: 14px">
+                            RM 100
+                        </button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w3-row">
+                    <div class="w3-col" style="width: 50%;padding-top: 25px">
+                        <span style="color: #7188B9;">50 Credits</span>
+                    </div>
+                    <div class="w3-col" style="width: 50%;text-align: right;padding-right: 20px;padding-top: 15px">
+                        <button style="background-image: url('Assets/bt_upgrade.jpg');border: none;border-radius: 4px;height: 40px;width: 100px;color: #fff;font-weight: bold;font-size: 14px">
+                            RM 250
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div style="width: 100%;height: 56px;text-align: center;color: #fff">
+        <span style="font-weight: 500;text-shadow: 1px 1px 4px #000;font-size: 22px">UNLIMITED MONTHLY PACKS</span><br>
+        <span style="font-size: 12px;color: #889CC6;">Get unlimited credits on a monthly basis</span>
+    </div>
+    <div class="credits w3-card-4">
+        <ul>
+            <li>
+                <div class="w3-row">
+                    <div class="w3-col" style="width: 50%;padding-top: 25px">
+                        <span style="color: #7188B9;">1 Month</span>
+                    </div>
+                    <div class="w3-col" style="width: 50%;text-align: right;padding-right: 20px;padding-top: 15px">
+                        <button style="background-image: url('Assets/bt_upgrade.jpg');border: none;border-radius: 4px;height: 40px;width: 100px;color: #fff;font-weight: bold;font-size: 14px">
+                            RM 299 / mo.
+                        </button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w3-row">
+                    <div class="w3-col" style="width: 50%;padding-top: 25px">
+                        <span style="color: #7188B9;">3 Months</span>
+                    </div>
+                    <div class="w3-col" style="width: 50%;text-align: right;padding-right: 20px;padding-top: 15px">
+                        <button style="background-image: url('Assets/bt_upgrade.jpg');border: none;border-radius: 4px;height: 40px;width: 100px;color: #fff;font-weight: bold;font-size: 14px">
+                            RM 249 / mo.
+                        </button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w3-row">
+                    <div class="w3-col" style="width: 50%;padding-top: 25px">
+                        <span style="color: #7188B9;">Yearly</span>
+                    </div>
+                    <div class="w3-col" style="width: 50%;text-align: right;padding-right: 20px;padding-top: 15px">
+                        <button style="background-image: url('Assets/bt_upgrade.jpg');border: none;border-radius: 4px;height: 40px;width: 100px;color: #fff;font-weight: bold;font-size: 14px">
+                            RM 199 / mo.
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div style="bottom: 0;font-size: 16px;color: #8B9EC6;text-align: center;width: 100%;padding-top: 23px;height: 80px">
+        <span>Made by AMSB. All Right Reserved. &copy; 2017.</span>
+    </div>
+</div>
+<div id="transaction" class="w3-animate-left bgMenuSideBar">
+    <div style="height: 130px;width: 100%">
+        <div class="w3-row" style="padding-left: 15px;padding-top: 15px;display: flex">
+            <div class="w3-col" style="width: 50px;padding-top: 3px">
+                <a href="#" onclick="closeTransaction()">
+                    <i class="material-icons" style="color: #fff">arrow_back</i>
+                </a>
+            </div>
+            <div class="w3-col" style="width: 80%;width: 80%;font-size: 20px;font-weight: 500;color: #fff;">
+                <span>TRANSACTIONS</span>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;height: auto;background-color: #fff;padding-top: 100px;" class="w3-card-4">
+        <div class="avatarAccount">
+            <img src="Assets/img_account.png" class="w3-circle w3-card-4" width="130"
+                 style=" border: 4px solid #5376C0;">
+            <div style="padding-top: 13px;color: #36569B;font-weight: 600;">
+                <span>LEE AMY RYAN</span>
+            </div>
+        </div>
+        <div class="transactionList">
+            <ul>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="font-weight: 600">Add 10 Prediction Credits</span><br>
+                        <span style="font-size: 12px;color:#4DC872 ">Success</span>
+                    </div>
+                    <div style="float: right;padding-top: 19px;text-align: right">
+                        <span style="font-size: 16px;color: #7188B9;">28-Aug, '17</span>
+                    </div>
+                </li>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="font-weight: 600">Add 10 Prediction Credits</span><br>
+                        <span style="color: #EB6647">Failed</span>
+                    </div>
+                    <div style="float: right;padding-top: 19px;text-align: right">
+                        <span style="font-size: 16px;color: #7188B9;">22-Aug, '17</span>
+                    </div>
+                </li>
+                <li>
+                    <div style="float: left;padding-top: 19px">
+                        <span style="font-weight: 600">Free 3-Month Trial</span><br>
+                        <span style="font-size: 12px;color:#4DC872 ">Success</span>
+                    </div>
+                    <div style="float: right;line-height: 4">
+                        <span style="font-size: 16px;color: #7188B9;">28-Aug, '17</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="background-color: #fff;text-align: center;padding-top: 20px;padding-bottom: 10px;bottom: 0;position: absolute;width: 100%">
+        <div style="margin: auto; color: #92A3C9;font-size: 12px;">
+            <span>Something doesn't look right?</span><br>
+            <a style="font-weight: bold;font-size: 14px;border-bottom: 2px solid #92A3C9;">CONTACT US</a>
+        </div>
+    </div>
+</div>
+<div id="menuSideBar" class="sideBar w3-animate-left">
+    <div style="background-color: #fff;width: 100%;height: 100%;" class="bgMenuSideBar">
+        <div style="position: relative;margin-bottom: 15px;background-color: #fff">
+            <img src="Assets/logo@1x.png" width="293" height="92" style="margin-top: 22px">
+            <a class="btnClose" onclick="closeMenuSideBar();">&times</a>
+        </div>
+        <div style="height: 60px;padding-top: 21px;padding-left: 30px">
+            <img src="Assets/search.png" height="33" width="33" style="margin-bottom: -15px">
+            <input class="inputSearch" type="text" placeholder="Search for a match">
+        </div>
+        <div id="listMenuSideBar" style="background-color: #fff;">
+            <ul style="list-style: none">
+                <li class="activeMenuSideBar">
+                    <a href="#predictions" onclick="openTabMenuSideBar('content')">
+                        <img src="Assets/menu_predictions@1x.png"
+                             style="margin-bottom: -11px;margin-top: 3px;margin-right: 24px;">
+                        <span>PREDICTIONS</span>
+                        <span class="w3-tag"
+                              style="font-weight: normal;background-color: #FF785A;border-radius: 15px;padding-top: 3px;padding-bottom: 3px">2 New</span>
+                        <span class="w3-tag"
+                              style="font-weight: normal;background-color: #36CC64;border-radius: 15px;padding-top: 3px;padding-bottom: 3px">3 New</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#livescores" onclick="openTabMenuSideBar('liveScores')" style="padding-top: 9px;">
+                        <img src="Assets/menu_livescores@1x.png" style="margin-right: 24px;">
+                        <span style="margin-top: 39px">LIVE SCORES</span>
+                        <span class="w3-tag"
+                              style="font-weight: normal;background-color: #36CC64;border-radius: 15px;padding-top: 3px;padding-bottom: 3px">8 New</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#aboutus" onclick="openAboutUs()">
+                        <img src="Assets/menu_aboutus@1x.png" style="margin-bottom: -12px;margin-right: 24px;">
+                        <span>ABOUT US</span>
+                    </a>
+                </li>
+                <li class="myAccount" style="display: none">
+                    <a href="#account" onclick="openAccount();">
+                        <img src="Assets/menu_my_account@1x.png"
+                             style="margin-bottom: -12px;margin-top: 3px;margin-right: 24px;">
+                        <span>MY ACCOUNT</span>
+                    </a>
+                </li>
+                <li class="login" style="border-bottom: none">
+                    <a href="#login" style="padding-top: 11px;" onclick="openLogin(this)" title="login">
+                        <img src="Assets/menu_login@1x.png"
+                             style="margin-bottom: -14px;margin-top: -5px;margin-right: 24px;">
+                        <span>LOGIN/SIGN UP</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="footerSideBar">
+            <span>Made by AMSB. All Right Reserved. &copy; 2017.</span>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

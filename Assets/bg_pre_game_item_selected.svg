@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="398px" height="48px" viewBox="0 0 398 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>bg_pre_game_item_selected</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="48.4139588%" y1="0%" x2="49.9535972%" y2="94.0504%" id="linearGradient-1">
+            <stop stop-color="#138737" offset="0%"></stop>
+            <stop stop-color="#31A354" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="398" height="48" rx="3"></rect>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bg_pre_game_item_selected">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <use id="Mask" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+            <path d="M7,4 L391,4 C392.656854,4 394,5.34314575 394,7 L394,41 C394,42.6568542 392.656854,44 391,44 L7,44 L7,44 C5.34314575,44 4,42.6568542 4,41 L4,7 L4,7 C4,5.34314575 5.34314575,4 7,4 L7,4 Z M9,6 L9,6 C7.34314575,6 6,7.34314575 6,9 L6,9 L6,39 C6,40.6568542 7.34314575,42 9,42 L389,42 C390.656854,42 392,40.6568542 392,39 L392,9 C392,7.34314575 390.656854,6 389,6 L389,6 L9,6 Z" id="Combined-Shape" fill="#FFFFFF" mask="url(#mask-3)"></path>
+            <g id="Group-4" mask="url(#mask-3)" fill="url(#linearGradient-4)" opacity="0.200000003">
+                <g transform="translate(-151.000000, -214.000000)">
+                    <rect id="Rectangle-4" style="mix-blend-mode: soft-light;" transform="translate(200.403500, 210.461881) rotate(-8.000000) translate(-200.403500, -210.461881) " x="1.4035001" y="186.461881" width="398" height="48"></rect>
+                    <rect id="Rectangle-4-Copy-3" style="mix-blend-mode: soft-light;" transform="translate(208.558013, 258.847611) rotate(-23.000000) translate(-208.558013, -258.847611) " x="9.55801292" y="234.847611" width="398" height="48"></rect>
+                    <rect id="Rectangle-4-Copy" style="mix-blend-mode: soft-light;" transform="translate(465.312928, 204.464121) rotate(28.000000) translate(-465.312928, -204.464121) " x="266.312928" y="147.791131" width="398" height="113.345979"></rect>
+                    <rect id="Rectangle-4-Copy-2" style="mix-blend-mode: soft-light;" transform="translate(432.713944, 204.846528) rotate(66.000000) translate(-432.713944, -204.846528) " x="233.713944" y="148.173538" width="398" height="113.345979"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="28px" viewBox="0 0 24 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_help</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#668FCB" offset="0%"></stop>
+            <stop stop-color="#36569B" offset="100%"></stop>
+        </linearGradient>
+        <path d="M21.3333333,0 L2.66666667,0 C1.2,0 0,1.2 0,2.66666667 L0,21.3333333 C0,22.8 1.2,24 2.66666667,24 L8,24 L12,28 L16,24 L21.3333333,24 C22.8,24 24,22.8 24,21.3333333 L24,2.66666667 C24,1.2 22.8,0 21.3333333,0 Z M13.3333333,21.3333333 L10.6666667,21.3333333 L10.6666667,18.6666667 L13.3333333,18.6666667 L13.3333333,21.3333333 Z M16.1333333,11.0666667 L14.9333333,12.2666667 C13.866719,13.2 13.3333333,14 13.3333333,16 L10.6666667,16 L10.6666667,15.3333333 C10.6666667,13.8666667 11.2,12.5333333 12.2666667,11.6 L13.866719,9.86666667 C14.4000523,9.46666667 14.666719,8.8 14.666719,8 C14.666719,6.53333333 13.466719,5.33333333 12.0000523,5.33333333 C10.5333856,5.33333333 9.33338562,6.53333333 9.33338562,8 L6.66671895,8 C6.66671895,5.06666667 9.06671895,2.66666667 12.0000523,2.66666667 C14.9333856,2.66666667 17.3333856,5.06666667 17.3333856,8 C17.3333333,9.2 16.8,10.2666667 16.1333333,11.0666667 Z" id="path-2"></path>
+        <filter x="-2.1%" y="-1.8%" width="104.2%" height="103.6%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <rect id="path-5" x="0" y="0" width="24" height="24" rx="2"></rect>
+        <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="linearGradient-7">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon_help">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <g id="Mask" fill-rule="nonzero">
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-2"></use>
+            </g>
+            <g id="Rectangle-13-+-Rectangle-13-Copy-+-Rectangle-13-Copy-3-+-Rectangle-13-Copy-2-Mask" mask="url(#mask-3)">
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <use id="Mask" fill="url(#linearGradient-1)" xlink:href="#path-5"></use>
+                <rect id="Rectangle-13" fill="url(#linearGradient-7)" opacity="0.400000006" style="mix-blend-mode: soft-light;" mask="url(#mask-6)" transform="translate(21.134819, 9.034313) rotate(-195.000000) translate(-21.134819, -9.034313) " x="16.6348186" y="-9.46568651" width="9" height="37"></rect>
+                <rect id="Rectangle-13-Copy" fill="url(#linearGradient-7)" opacity="0.400000006" style="mix-blend-mode: soft-light;" mask="url(#mask-6)" transform="translate(25.263456, 4.263456) rotate(-225.000000) translate(-25.263456, -4.263456) " x="20.763456" y="-14.236544" width="9" height="37"></rect>
+                <rect id="Rectangle-13-Copy-3" fill="url(#linearGradient-7)" opacity="0.400000006" style="mix-blend-mode: soft-light;" mask="url(#mask-6)" transform="translate(1.358253, 14.726919) scale(-1, 1) rotate(-150.000000) translate(-1.358253, -14.726919) " x="-4.05264521" y="-3.77308084" width="10.8217968" height="37"></rect>
+                <rect id="Rectangle-13-Copy-2" fill="url(#linearGradient-7)" opacity="0.400000006" style="mix-blend-mode: soft-light;" mask="url(#mask-6)" transform="translate(0.133244, 1.954061) scale(-1, 1) rotate(-210.000000) translate(-0.133244, -1.954061) " x="-9.00157484" y="-16.5459393" width="18.2696371" height="37"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

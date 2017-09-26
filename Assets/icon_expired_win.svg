@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="48px" viewBox="0 0 65 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_expired_win</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="79.4420424%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#138737" offset="0%"></stop>
+            <stop stop-color="#31A354" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="64" height="48"></rect>
+        <filter x="-0.8%" y="-1.0%" width="103.1%" height="102.1%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="1" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-4.7%" y="-6.2%" width="110.9%" height="112.5%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="2" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="2" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon_expired_win">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <g id="Mask">
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-2"></use>
+            </g>
+            <path d="M22.2307692,15.8 C22.0769231,15.64 22,15.4 22,15.24 C22,15.08 22.0769231,14.84 22.2307692,14.68 L23.3076923,13.56 C23.6153846,13.24 24.0769231,13.24 24.3846154,13.56 L24.4615385,13.64 L28.6923077,18.36 C28.8461538,18.52 29.0769231,18.52 29.2307692,18.36 L39.5384615,7.24 L39.6153846,7.24 L39.6153846,7.24 C39.9230769,6.92 40.3846154,6.92 40.6923077,7.24 L41.7692308,8.36 C42.0769231,8.68 42.0769231,9.16 41.7692308,9.48 L41.7692308,9.48 L29.4615385,22.76 C29.3076923,22.92 29.1538462,23 28.9230769,23 C28.6923077,23 28.5384615,22.92 28.3846154,22.76 L22.3846154,16.04 L22.2307692,15.8 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero" mask="url(#mask-3)"></path>
+            <text id="Win" fill="#FFFFFF" mask="url(#mask-3)" font-family="Roboto-Regular, Roboto" font-size="12" font-weight="normal">
+                <tspan x="22.4101562" y="38">Win</tspan>
+            </text>
+            <g id="Group-4" mask="url(#mask-3)" fill="url(#linearGradient-6)" opacity="0.200000003">
+                <g transform="translate(-151.000000, -214.000000)">
+                    <rect id="Rectangle-4" style="mix-blend-mode: soft-light;" transform="translate(200.403500, 210.461881) rotate(-8.000000) translate(-200.403500, -210.461881) " x="1.4035001" y="186.461881" width="398" height="48"></rect>
+                    <rect id="Rectangle-4-Copy-3" style="mix-blend-mode: soft-light;" transform="translate(208.558013, 258.847611) rotate(-23.000000) translate(-208.558013, -258.847611) " x="9.55801292" y="234.847611" width="398" height="48"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

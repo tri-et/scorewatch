@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="402px" height="52px" viewBox="0 0 402 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>bg_expired_item</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="48.4139588%" y1="0%" x2="49.911149%" y2="91.4574089%" id="linearGradient-1">
+            <stop stop-color="#5D5D5D" offset="0%"></stop>
+            <stop stop-color="#7B7B7B" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="398" height="48" rx="3"></rect>
+        <filter x="-0.9%" y="-5.2%" width="101.8%" height="114.6%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bg_expired_item" transform="translate(2.000000, 1.000000)">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <g id="Mask">
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+            </g>
+            <g id="Group-4" mask="url(#mask-3)" fill="url(#linearGradient-5)" opacity="0.200000003">
+                <g transform="translate(-151.000000, -214.000000)">
+                    <rect id="Rectangle-4" style="mix-blend-mode: soft-light;" transform="translate(200.403500, 210.461881) rotate(-8.000000) translate(-200.403500, -210.461881) " x="1.4035001" y="186.461881" width="398" height="48"></rect>
+                    <rect id="Rectangle-4-Copy-3" style="mix-blend-mode: soft-light;" transform="translate(208.558013, 258.847611) rotate(-23.000000) translate(-208.558013, -258.847611) " x="9.55801292" y="234.847611" width="398" height="48"></rect>
+                    <rect id="Rectangle-4-Copy" style="mix-blend-mode: soft-light;" transform="translate(465.312928, 204.464121) rotate(28.000000) translate(-465.312928, -204.464121) " x="266.312928" y="147.791131" width="398" height="113.345979"></rect>
+                    <rect id="Rectangle-4-Copy-2" style="mix-blend-mode: soft-light;" transform="translate(432.713944, 204.846528) rotate(66.000000) translate(-432.713944, -204.846528) " x="233.713944" y="148.173538" width="398" height="113.345979"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

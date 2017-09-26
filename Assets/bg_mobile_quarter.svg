@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="414px" height="81px" viewBox="0 0 414 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>bg_mobile_quarter</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="414" height="81"></rect>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Mobile-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Menu" transform="translate(0.000000, -128.000000)">
+            <g id="Group-3-Copy" transform="translate(0.000000, 128.000000)">
+                <g id="bg_mobile_quarter">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#36569B" xlink:href="#path-1"></use>
+                    <g id="Group-4" mask="url(#mask-2)" fill="url(#linearGradient-3)" opacity="0.200000003">
+                        <g transform="translate(-192.000000, -185.000000)">
+                            <rect id="Rectangle-4" style="mix-blend-mode: soft-light;" transform="translate(198.214249, 198.214249) rotate(-45.000000) translate(-198.214249, -198.214249) " x="-0.785750544" y="116.89697" width="398" height="162.63456"></rect>
+                            <rect id="Rectangle-4-Copy-3" style="mix-blend-mode: soft-light;" transform="translate(256.382426, 188.839296) rotate(-23.000000) translate(-256.382426, -188.839296) " x="57.3824258" y="119.221193" width="398" height="139.236206"></rect>
+                            <rect id="Rectangle-4-Copy" style="mix-blend-mode: soft-light;" transform="translate(535.312928, 173.464121) rotate(28.000000) translate(-535.312928, -173.464121) " x="336.312928" y="116.791131" width="398" height="113.345979"></rect>
+                            <rect id="Rectangle-4-Copy-2" style="mix-blend-mode: soft-light;" transform="translate(572.870577, 226.555954) rotate(66.000000) translate(-572.870577, -226.555954) " x="451.557955" y="164.678039" width="242.625242" height="123.75583"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

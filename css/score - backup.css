@@ -1,0 +1,1291 @@
+body {
+    background-color: #fff;
+    font-family: Roboto-Regular;
+}
+
+.mainMenu {
+    height: 64px;
+    background-color: #fff;
+    min-width: 320px;
+    max-width: 1568px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+    top: 0;
+    right: 0;
+    margin: auto;
+    left: 0;
+    position: fixed;
+    z-index: 1;
+}
+
+.mainMenu > ul {
+    list-style: none;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    height: 64px;
+    display: flex;
+}
+
+.mainMenu > ul li {
+    float: left;
+    box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.2);
+    padding: 17px 16px 0px 16px;
+    height: 64px;
+    min-width: 64px;
+}
+
+.mainMenu > ul li a {
+    text-decoration: none;
+    color: #909090;
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+}
+
+.mainMenu > ul li a span {
+    float: left;
+}
+
+.mainMenu > ul li hr {
+    margin: 39px -11px 9px;
+    border: 0;
+    border-top: 4px solid #6087DB;
+    border-radius: 10px;
+    display: none;
+}
+
+.mainMenu > ul li a span:nth-child(2) {
+    padding-top: 9px;
+    padding-left: 16px;
+}
+
+.menuRight {
+    float: right;
+}
+
+.sideBar {
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: fixed !important;
+    overflow: auto;
+    z-index: 2;
+}
+
+#menuSideBar {
+    background-color: rgba(0, 0, 0, .2);
+    display: none;
+    padding-right: 24px;
+}
+
+.bgMenuSideBar {
+    background-image: url("../Assets/bg_mobile_full@2x.png");
+}
+
+.inputSearch {
+    font-size: 16px;
+    color: #fff;
+    height: 33px;
+    min-width: 200px;
+    max-width: 250px;
+    margin-left: 20px;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background-color: transparent;
+}
+
+.footerSideBar {
+    bottom: 0;
+    position: absolute;
+    font-size: 16px;
+    color: #8B9EC6;
+    text-align: center;
+    width: 100%;
+    padding: 15px;
+}
+
+#listMenuSideBar > ul {
+    padding: 0px;
+}
+
+#listMenuSideBar > ul > li {
+    height: 80px;
+    border-bottom: 1px solid #F0F0F0;
+    padding-top: 18px;
+    padding-left: 24px;
+}
+
+#listMenuSideBar > ul > li > a {
+    float: left;
+    display: block;
+    color: #4D86DA;
+    text-align: center;
+    padding: 6px 10px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/*#login {
+    display: none;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}*/
+
+#windowLogin {
+    display: none;
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#windowHelp {
+    display: none;
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#logout {
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    display: none;
+    z-index: 3;
+    top: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#help {
+    background-color: #fff;
+    height: 100%;
+    border-radius: 4px;
+    max-width: 700px;
+    height: 500px;
+    margin: auto;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+}
+
+#account, #upgrade, #transaction {
+    background-color: rgb(54, 204, 100);
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    overflow: auto;
+}
+
+.transactionList ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.transactionList ul li:nth-child(2n) {
+    background-color: #F0F0F0;
+}
+
+.transactionList ul li:nth-child(2n+1) {
+    background-color: #fff;
+}
+
+.transactionList ul li {
+    height: 70px;
+    color: #7188B9;
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+.transactionList ul li:not(:last-child) {
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.credits ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.credits ul li {
+    height: 70px;
+    padding-left: 20px;
+}
+
+.credits ul li:nth-child(2n) {
+    background-color: #F0F0F0;
+}
+
+.credits ul li:nth-child(2n+1) {
+    background-color: #fff;
+}
+
+.avatarAccount {
+    position: absolute;
+    top: 62px;
+    right: 0;
+    left: 0;
+    text-align: center;
+}
+
+.membership ul {
+    list-style: none;
+    width: 100%;
+    padding-left: 0px;
+}
+
+.membership ul li {
+    padding-left: 20px;
+    height: 60px;
+    padding-right: 15px;
+}
+
+.membership ul li:not(:last-child) {
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.footerLogin {
+    bottom: 0;
+    position: absolute;
+    background-color: #fff;
+    height: 71px;
+    color: #C2CCE1;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 17px;
+    width: 100%;
+}
+
+#loginRules {
+    background-color: #fff;
+    padding-top: 15px;
+}
+
+#loginRules > ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 20px;
+}
+
+#loginRules > ul > li {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+
+.titleLogin {
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0px 15px 0px
+}
+
+.logo {
+    background-image: url("../Assets/logo@2x.png");
+    background-repeat: no-repeat;
+    height: 184px;
+}
+
+.tabMenu {
+    display: none;
+}
+
+/*#liveScores {
+    width: 100%;
+    height: 100%;
+    display: none;
+    margin-top: 64px;
+}*/
+
+#windowLiveScoresDetail {
+    width: 100%;
+    height: 100%;
+    display: none;
+    top: 0;
+    position: absolute;
+    z-index: 3;
+}
+
+.headerLiveScores {
+    background-image: url('../Assets/bg_mobile_quarter@1x.png');
+    height: 50px;
+    color: #fff;
+    padding-left: 24px;
+    padding-top: 13px;
+}
+
+.liveScoreTextBold {
+    color: #38619E;
+    font-weight: bold;
+}
+
+.liveScoreText {
+    color: #C2CFE1;
+}
+
+.listlivescores > ul > li:not(:last-child) {
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.listlivescores > ul > li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.learnMore {
+    background-color: #fff;
+    height: 50px;
+    min-width: 275px;
+    padding-top: 15px;
+    color: #617AB0;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 1px -18px 29px -7px rgba(0, 0, 0, 0.1);
+}
+
+#aboutUs {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+}
+
+.btnClose {
+    position: absolute;
+    right: 13px;
+    font-size: 40px;
+    color: #36569B;
+    cursor: pointer;
+}
+
+.windowAboutUs {
+
+    min-width: 320px;
+    height: 534px;
+    background-color: #fff;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    border-radius: 6px;
+    box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.2);
+}
+
+.aboutContent {
+    overflow: auto;
+    height: 403px;
+    background-image: url("../Assets/bg_mobile_full@2x.png");
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.aboutContent::-webkit-scrollbar {
+    width: 7px;
+
+}
+
+.aboutContent::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color: #F1F1F1;
+}
+
+.aboutContent::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.itemHelp ul li {
+    padding: 10px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.itemHelp::-webkit-scrollbar {
+    width: 7px;
+
+}
+
+.itemHelp::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color: #F1F1F1;
+}
+
+.itemHelp::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.textAbout {
+    height: 110px;
+    margin: auto;
+    overflow: hidden
+}
+
+.aboutItems {
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.aboutItems > div[class='iconAbout'] > div {
+    position: absolute;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: Roboto;
+    color: #464646;
+}
+
+.footer {
+    height: 64px;
+    background-color: #aaa;
+    min-width: 100%;
+    max-width: 1568px;
+}
+
+.activeMenu, .mainMenu ul li:not(.menuRight):hover hr, .mainMenu ul li:not(.menuRight):hover a > span:nth-child(2) {
+    display: block !important;
+    color: #36569B !important;
+    font-family: Roboto !important;
+    font-size: 16px !important;
+    font-weight: 600;
+    line-height: 16px !important;
+}
+
+.mainContent {
+    background-color: #F2F2F2;
+    min-width: 320px;
+    max-width: 1568px;
+    height: 100%;
+    position: relative;
+}
+
+#contentInPlayPreGame {
+    min-width: 320px;
+    max-width: 992px;
+    height: auto;
+    float: left;
+    width: 100%;
+}
+
+#colInPlay, #colPreGame {
+    min-width: 320px;
+    max-width: 480px;
+    margin-top: 16px;
+    margin-left: 16px;
+    height: auto;
+}
+
+#colDetail {
+    min-width: 320px;
+    max-width: 560px;
+    height: 960px;
+    background-color: #fff;
+    margin-left: 16px;
+    float: right;
+}
+
+#content,#liveScores {
+    width: 100%;
+    margin-top: 64px;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #248f24;
+    margin-bottom: 1px;
+    margin-left: 5px;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #FF9A84;
+    margin-bottom: 3px;
+    margin-left: 5px;
+}
+
+#pregame > div:nth-child(2n) {
+    background-color: #adebc1;
+}
+
+#pregame > div:nth-child(2n+1) {
+    background-color: #fff;
+}
+
+#pregame > div:hover {
+    background-color: #26994B;
+}
+
+#expiredpregame > div:nth-child(2n) {
+    background-color: #d9d9d9;
+}
+
+#expiredpregame > div:nth-child(2n+1) {
+    background-color: #fff;
+}
+
+#expiredpregame > div:hover {
+    background-color: #333333;
+}
+
+#statsDetail,#timeLineDetail {
+    background-color: #fff;
+}
+
+#statsDetail ul,#timeLineDetail ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#statsDetail ul li,#timeLineDetail ul li {
+    padding: 0px;
+}
+.drawRightLine{
+    border-top: 6px solid #36CC64;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.drawLeftLine{
+    float: right;
+    border-top: 6px solid #FF785A;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.news {
+    border-radius: 12px;
+    font-family: Roboto;
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 14px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 5px 8px;
+    text-transform: none;
+    margin-top: 4px;
+    margin-left: 8px;
+}
+
+.clear-fix {
+    clear: both !important;
+    display: block !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+#center {
+    margin: auto;
+}
+
+.txtRightMenu {
+    color: #36569B;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    padding-top: 4px !important;
+}
+
+.iconMenu {
+    display: none;
+}
+
+.hederDetailInPlay {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 53px;
+    font-size: 14px;
+    background-image: url("../Assets/bg_header_match_detail.png");
+}
+
+.inPlayButton {
+
+    background-image: url("../Assets/bg_in_play_item@1x.png");
+    border: none;
+    border-radius: 4px;
+    height: 35px;
+    width: 100%;
+    margin: 8px 0px 8px 0px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.expiredButton {
+
+    border: none;
+    border-radius: 4px;
+    height: 35px;
+    width: 100%;
+    margin: 8px 0px 8px 0px;
+    color: #fff;
+    cursor: pointer;
+    background-image: url('../Assets/bg_expired_row.png');
+}
+
+.live {
+    width: 50px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, .6);
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #fff;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+    font-family: Regular;
+}
+
+.listMatchDetail > div {
+    background-color: #fff;
+    height: 47px;
+    padding-top: 16px;
+}
+
+.homeAway {
+    border-radius: 3px;
+    width: inherit;
+    display: inline;
+    padding: 6px;
+}
+
+.description {
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding-top: 10px;
+    width: 50%;
+    background-color: rgba(0, 0, 0, .6);
+    font-family: Regular;
+}
+
+.headerInPlay {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 53px;
+    font-size: 14px;
+    background-image: url("../Assets/bg_in_play_row@2x.png");
+}
+
+.preGameButton {
+
+    border: none;
+    border-radius: 4px;
+    height: 35px;
+    width: 100%;
+    margin: 8px 0px 8px 0px;
+    color: #fff;
+    cursor: pointer;
+    background-image: url('../Assets/bg_pre_game_item@2x.png');
+}
+
+.match {
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#inplay > div:nth-child(2n) {
+    background-color: #ffe6e6;
+}
+
+#inplay > div:nth-child(2n+1) {
+    background-color: #fff;
+}
+
+#inplay > div:hover {
+    background-color: #EA5E40;
+}
+
+.match:hover {
+    background-color: #fff;
+}
+
+.hederExpiredInPlay, .hederExpiredPregame {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 53px;
+    font-size: 14px;
+    background-image: url('../Assets/bg_expired_row.png');
+}
+
+.headerPreGame {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 53px;
+    font-size: 14px;
+    background-image: url('../Assets/bg_pre_game_row@2x.png');
+}
+
+.timeInPlay {
+    color: #FF9A84;
+}
+
+/*fix css for screen*/
+
+@media (max-width: 842px) {
+    #windowHelp {
+        position: fixed;
+    }
+
+    #login {
+        width: 100%;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        position: fixed;
+        height: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    #menuSideBar {
+        padding-right: 0px;
+    }
+
+    .mainMenu ul li {
+        box-shadow: none !important;
+    }
+
+    .mainMenu ul li hr {
+        display: none !important;
+    }
+
+    .activeMenu, .mainMenu ul li:not(.menuRight):hover a > span:nth-child(2) {
+        color: #36569B !important;
+        font-family: Roboto !important;
+        font-size: 20px !important;
+        font-weight: 500;
+        line-height: 16px !important;
+    }
+
+    .mainMenu ul li:not(.menuRight):hover hr {
+        display: none !important;
+    }
+
+    .mainMenu ul li:not(:nth-child(4)):not(:nth-child(2)), .mainMenu a span:not(:nth-child(2)):not(.icon) {
+        display: none;
+    }
+
+    .iconMenu {
+        display: block !important;
+    }
+
+    .mainMenu ul li:nth-child(2) {
+        flex: 1 !important;
+    }
+
+    .mainMenu ul li:nth-child(2) {
+        padding: 17px 0px 0px 0px !important;
+    }
+
+    .mainMenu ul li a span:nth-child(2) {
+        font-weight: 500 !important;
+        font-size: 20px !important;
+        padding-left: 0px;
+        padding-top: 7px;
+    }
+}
+
+@media screen and (min-width: 320px) {
+    #colInPlay, #colPreGame {
+        max-width: 320px;
+        margin: 0px;
+    }
+
+    #colDetail {
+        max-width: 320px;
+        position: absolute;
+        right: 0;
+    }
+
+    .mainContent {
+        min-width: 320px;
+    }
+
+    #center {
+        width: min-content;
+        margin: 0;
+    }
+
+    .windowAboutUs {
+        border-radius: 0px;
+        box-shadow: none;
+    }
+
+    .aboutContent {
+        height: calc(100vh - 134px);
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .windowAboutUs {
+        height: 100%;
+    }
+
+    .aboutItems {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    #colInPlay, #colPreGame {
+        max-width: 480px;
+        margin: 0px;
+    }
+
+    #colDetail {
+        max-width: 456px;
+        position: absolute;
+        right: 0;
+    }
+
+    #center {
+        width: max-content;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 560px) {
+    #colInPlay, #colPreGame {
+        max-width: 480px;
+        margin-top: 16px;
+        margin-left: 16px;
+    }
+
+    #colDetail {
+        max-width: 480px;
+        position: absolute;
+        right: 0;
+    }
+
+    #center {
+        width: max-content;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 672px) {
+    #colInPlay, #colPreGame {
+        max-width: 320px;
+        margin-top: 16px;
+        margin-left: 16px;
+    }
+
+    #colDetail {
+        max-width: 320px;
+        position: relative;
+    }
+
+    #center {
+        width: min-content;
+        margin: auto;
+    }
+
+    .aboutContent {
+        height: calc(100vh - 134px);
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .windowAboutUs {
+        height: 100%;
+        max-width: 100%;
+    }
+
+    .aboutItems {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (min-width: 842px) {
+    #windowHelp {
+        position: absolute;
+    }
+
+    #login {
+        max-width: 804px;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        position: fixed;
+        height: 477px;
+        left: 0;
+        right: 0;
+        padding: 2px;
+        box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    #loginRules {
+        background-color: #fff;
+        padding-top: 15px;
+        float: left;
+        width: 400px;
+        border-right: 1px solid #F0F0F0;
+    }
+
+    #groupButtonLogin {
+        float: right;
+        width: 400px;
+    }
+
+    .footerLogin {
+        width: 400px;
+        position: initial;
+        float: right;
+    }
+
+    .bgMenuSideBar {
+        background-color: #fff;
+        background-image: none;
+    }
+
+    .titleLogin {
+        color: #3C5A98;
+    }
+
+    #groupButtonLogin button {
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+}
+
+@media screen and (min-width: 912px) {
+
+    #menuSideBar {
+        /*display: none !important;*/
+    }
+
+    #colInPlay, #colPreGame {
+        max-width: 320px;
+        margin-top: 16px;
+        margin-left: 16px;
+    }
+
+    #contentInPlayPreGame {
+        /*max-width: 337px;*/
+    }
+
+    #content {
+        min-width: 913px;
+    }
+
+    #colDetail {
+        max-width: 560px;
+    }
+
+    #center {
+        width: min-content;
+        margin: auto;
+    }
+
+    .aboutContent {
+        height: 403px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .windowAboutUs {
+        height: 534px;
+        max-width: 749px;
+        border-radius: 6px;
+        box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .learnMore {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #windowHelp {
+        position: absolute;
+    }
+
+    #login {
+        max-width: 804px;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        position: fixed;
+        height: 477px;
+        left: 0;
+        right: 0;
+        padding: 2px;
+        box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    #loginRules {
+        background-color: #fff;
+        padding-top: 15px;
+        float: left;
+        width: 400px;
+        border-right: 1px solid #F0F0F0;
+    }
+
+    #groupButtonLogin {
+        float: right;
+        width: 400px;
+    }
+
+    .bgMenuSideBar {
+        background-color: #fff;
+        background-image: none;
+    }
+
+    .footerLogin {
+        width: 400px;
+        position: initial;
+        float: right;
+    }
+
+    .titleLogin {
+        color: #3C5A98;
+    }
+
+    #groupButtonLogin button {
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #colInPlay, #colPreGame {
+        max-width: 480px;
+        margin-top: 16px;
+        margin-left: 16px;
+    }
+
+    #contentInPlayPreGame {
+        /*max-width: 337px;*/
+    }
+
+    #content {
+        min-width: 913px;
+    }
+
+    #colDetail {
+        max-width: 560px;
+    }
+
+    #center {
+        width: 480px;
+        margin: auto;
+    }
+
+    .aboutContent {
+        height: 403px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .windowAboutUs {
+        height: 534px;
+        max-width: 749px;
+        border-radius: 6px;
+        box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .learnMore {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1248px) {
+
+    #colInPlay, #colPreGame {
+        max-width: 320px;
+        margin-top: 16px;
+        margin-left: 16px;
+    }
+
+    #contentInPlayPreGame {
+        /*max-width: 672px;*/
+    }
+
+    #content {
+        /*min-width: 1248px;*/
+    }
+
+    #colDetail {
+        max-width: 560px;
+    }
+
+    #center {
+        width: max-content;
+        margin: auto;
+    }
+
+    .aboutContent {
+        height: 403px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .windowAboutUs {
+        height: 534px;
+        max-width: 749px;
+        border-radius: 6px;
+        box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .learnMore {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1568px) {
+    #windowHelp {
+        position: absolute;
+    }
+
+    #login {
+        max-width: 804px;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        position: fixed;
+        height: 477px;
+        left: 0;
+        right: 0;
+        padding: 2px;
+        box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    #loginRules {
+        background-color: #fff;
+        padding-top: 15px;
+        float: left;
+        width: 400px;
+        border-right: 1px solid #F0F0F0;
+    }
+
+    #groupButtonLogin {
+        float: right;
+        width: 400px;
+    }
+
+    #groupButtonLogin button {
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .bgMenuSideBar {
+        background-color: #fff;
+        background-image: none;
+    }
+
+    .footerLogin {
+        width: 400px;
+        position: initial;
+        float: right;
+    }
+
+    .titleLogin {
+        color: #3C5A98;
+    }
+
+    .mainContent {
+        margin: auto;
+    }
+
+    #content {
+        width: 1568px;
+    }
+
+    #contentInPlayPreGame {
+        /*max-width: 992px;*/
+    }
+
+    #colInPlay, #colPreGame {
+        max-width: 480px;
+        margin-top: 16px;
+        margin-left: 16px;
+    }
+
+    #colDetail {
+        max-width: 560px;
+    }
+
+    #center {
+        width: 100%;
+        margin: auto;
+    }
+
+    .learnMore {
+        display: none;
+    }
+
+    .aboutContent {
+        height: 403px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .windowAboutUs {
+        height: 534px;
+        max-width: 749px;
+        border-radius: 6px;
+        box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .mainMenu ul li:nth-child(n+4) a span:not(:nth-child(1)) {
+        display: none;
+    }
+}
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="48px" viewBox="0 0 65 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_expired_lose</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="48.4139588%" y1="0%" x2="50%" y2="96.8849649%" id="linearGradient-1">
+            <stop stop-color="#F56C4D" offset="0%"></stop>
+            <stop stop-color="#E95D3D" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="64" height="48"></rect>
+        <filter x="-0.8%" y="-1.0%" width="103.1%" height="102.1%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="1" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-4.7%" y="-6.2%" width="110.9%" height="112.5%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="2" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="2" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon_expired_lose">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <g id="Mask">
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-2"></use>
+            </g>
+            <text id="Lose" fill="#FFFFFF" mask="url(#mask-3)" font-family="Roboto-Regular, Roboto" font-size="12" font-weight="normal">
+                <tspan x="19.5771484" y="38">Lose</tspan>
+            </text>
+            <path d="M33.9015734,16.0000258 L39.6061598,10.2954394 C40.1312738,9.77032541 40.1312738,8.91894955 39.6061598,8.39391064 C39.0810458,7.86879662 38.229745,7.86879662 37.704631,8.39391064 L31.9999695,14.0985722 L26.295308,8.39383552 C25.7701939,7.86872149 24.9188932,7.86872149 24.3937792,8.39383552 C23.8687403,8.91894955 23.8687403,9.77032541 24.3937792,10.2953643 L30.0984407,15.9999507 L24.3937792,21.7046122 C23.8687403,22.2297262 23.8687403,23.0811021 24.3937792,23.606141 C24.9188932,24.131255 25.7701939,24.131255 26.295308,23.606141 L31.9999695,17.9014795 L37.704631,23.606141 C38.2296699,24.131255 39.0810458,24.131255 39.6061598,23.606141 C40.1312738,23.081027 40.1312738,22.2297262 39.6061598,21.7046122 L33.9015734,16.0000258 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero" mask="url(#mask-3)"></path>
+            <g id="Group-4-Copy-2" mask="url(#mask-3)" fill="url(#linearGradient-6)" opacity="0.200000003">
+                <g transform="translate(-151.000000, -214.000000)">
+                    <rect id="Rectangle-4" style="mix-blend-mode: soft-light;" transform="translate(200.403500, 210.461881) rotate(-8.000000) translate(-200.403500, -210.461881) " x="1.4035001" y="186.461881" width="398" height="48"></rect>
+                    <rect id="Rectangle-4-Copy-3" style="mix-blend-mode: soft-light;" transform="translate(208.558013, 258.847611) rotate(-23.000000) translate(-208.558013, -258.847611) " x="9.55801292" y="234.847611" width="398" height="48"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

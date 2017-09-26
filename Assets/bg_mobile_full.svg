@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="414px" height="736px" viewBox="0 0 414 736" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>bg_mobile_full</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Mobile-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Loading">
+            <g id="bg_mobile_full" transform="translate(-164.000000, -166.000000)">
+                <rect id="Rectangle-18" fill="#36569B" x="164" y="166" width="414" height="736"></rect>
+                <g id="Group-2" fill="url(#linearGradient-1)" opacity="0.200000003">
+                    <g id="Group-4">
+                        <rect id="Rectangle-4" style="mix-blend-mode: soft-light;" transform="translate(155.696275, 416.027553) rotate(-75.000000) translate(-155.696275, -416.027553) " x="-135.792962" y="333.071637" width="582.978473" height="165.91183"></rect>
+                        <rect id="Rectangle-4-Copy-3" style="mix-blend-mode: soft-light;" transform="translate(233.326546, 197.326546) rotate(-45.000000) translate(-233.326546, -197.326546) " x="34.326546" y="118.375887" width="398" height="157.901317"></rect>
+                        <rect id="Rectangle-4-Copy" style="mix-blend-mode: soft-light;" transform="translate(529.404944, 210.786333) rotate(-315.000000) translate(-529.404944, -210.786333) " x="330.404944" y="139.098865" width="398" height="143.374935"></rect>
+                        <rect id="Rectangle-4-Copy-2" style="mix-blend-mode: soft-light;" transform="translate(579.101205, 252.657771) rotate(66.000000) translate(-579.101205, -252.657771) " x="428.060455" y="189.532946" width="302.081501" height="126.24965"></rect>
+                    </g>
+                    <g id="Group-4-Copy" transform="translate(433.000000, 708.500000) scale(-1, -1) translate(-433.000000, -708.500000) translate(29.000000, 360.000000)">
+                        <rect id="Rectangle-4" style="mix-blend-mode: soft-light;" transform="translate(261.696275, 393.027553) rotate(-75.000000) translate(-261.696275, -393.027553) " x="-29.7929618" y="310.071637" width="582.978473" height="165.91183"></rect>
+                        <rect id="Rectangle-4-Copy-3" style="mix-blend-mode: soft-light;" transform="translate(197.172197, 196.774747) rotate(-45.000000) translate(-197.172197, -196.774747) " x="-1.82780293" y="117.824088" width="398" height="157.901317"></rect>
+                        <rect id="Rectangle-4-Copy" style="mix-blend-mode: soft-light;" transform="translate(565.595247, 242.084681) rotate(-315.000000) translate(-565.595247, -242.084681) " x="295.254132" y="170.397214" width="540.68223" height="143.374935"></rect>
+                        <rect id="Rectangle-4-Copy-2" style="mix-blend-mode: soft-light;" transform="translate(685.101205, 229.657771) rotate(66.000000) translate(-685.101205, -229.657771) " x="534.060455" y="166.532946" width="302.081501" height="126.24965"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
