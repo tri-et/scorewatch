@@ -1,8 +1,8 @@
 /**
  * Created by Tri Pham on 8/6/2017.
  */
-var predictionData;
-var liveScoreData;
+let predictionData;
+let liveScoreData;
 window.Event = new class {
     constructor() {
         this.vue = new Vue();
@@ -57,7 +57,35 @@ liveScoreData = new Vue({
     data: {
         league: [],
         leagueCol2: [],
-        liveScore: []
+        liveScore: [],
+        timeLineData: [],
+        statsData: []
+    },
+    filters: {
+        setStatus: function (v) {
+            let st = v;
+            switch (v) {
+                case '3':
+                case '1':
+                case '2':
+                    st = 'Live';
+                    break;
+                case '0':
+                    st = 'Kickoff';
+                    break;
+            }
+            return st;
+        },
+        setTime: function (v, time) {
+            let times = v;
+            switch (v){
+                case '':
+                    let date=new Date(time);
+                    times=date.getHours()+':'+date.getMinutes();
+                    break;
+            };
+            return times;
+        }
     },
     methods: {
         setLineHeight: function (val) {
@@ -130,42 +158,70 @@ function getDataPrediction() {
             //predictionData.preGame = [response.data.Pregame[0]];
             predictionData.inPlay = response.data.Running;
 
-            setTimeout('getDataPrediction()',10000);
+            setTimeout('getDataPrediction()', 10000);
             /*setTimeout(function () {
-                predictionData.preGame = pregameData;
-                if(!$('#predictionDetail').is(':hidden')){
-                   let matchID=$('#predictionDetail').attr('data-match-id');
-                   let newData= predictionData.preGame.find(x => x.match_code == matchID);
-                    predictionData.sendDataDetail(newData);
-                }
-            },7000);
+             predictionData.preGame = pregameData;
+             if(!$('#predictionDetail').is(':hidden')){
+             let matchID=$('#predictionDetail').attr('data-match-id');
+             let newData= predictionData.preGame.find(x => x.match_code == matchID);
+             predictionData.sendDataDetail(newData);
+             }
+             },7000);
 
-            setTimeout(function () {
-                predictionData.preGame = pregameData1;
-                if(!$('#predictionDetail').is(':hidden')){
-                    let matchID=$('#predictionDetail').attr('data-match-id');
-                    let newData= predictionData.preGame.find(x => x.match_code == matchID);
-                    predictionData.sendDataDetail(newData);
-                }
-            },20000);*/
+             setTimeout(function () {
+             predictionData.preGame = pregameData1;
+             if(!$('#predictionDetail').is(':hidden')){
+             let matchID=$('#predictionDetail').attr('data-match-id');
+             let newData= predictionData.preGame.find(x => x.match_code == matchID);
+             predictionData.sendDataDetail(newData);
+             }
+             },20000);*/
         })
         .catch(function (error) {
             console.log(error);
         });
 }
 function getDataLiveScore() {
-    axios.get('http://www.hasilskor.com/API/JSON.aspx?date=2017-09-26&sport=soccer&s=26PDpiffaaBbGrBdfgnrK2pknndskc1f3IMeKLW6PqdprBMHMqSTQ7gcmlcx7jZMxmyeTTBXRqwDh5p044MJHrf')
+    let timeLineDataJson;
+    let liveScoreDataJson;
+    axios.get('http://www.hasilskor.com/API/JSON.aspx?sport=soccer&s=26PDpiffaaBbGrBdfgnrK2pknndskc1f3IMeKLW6PqdprBMHMqSTQ7gcmlcx7jZMxmyeTTBXRqwDh5p044MJHrf')
         .then(function (response) {
-            var leagueName = [];
-            for (var i = 0; i < response.data.r.length; i++) {
-                if ($.inArray(response.data.r[i][5], leagueName) == (-1)) {
-                    leagueName.push(response.data.r[i][5]);
-                }
-            }
-            var leagueNameCl2 = leagueName.splice(0, Math.round(leagueName.length / 2));
-            liveScoreData.league = leagueName;
-            liveScoreData.leagueCol2 = leagueNameCl2;
-            liveScoreData.liveScore = response.data.r;
+            liveScoreDataJson = response;
+            //get time line data
+            axios.get('http://www.hasilskor.com/API/JSON.aspx?callback=callbackJSON&sport=soccerDA&s=26PDpiffaaBbGrBdfgnrK2pknndskc1f3IMeKLW6PqdprBMHMqSTQ7gcmlcx7jZMxmyeTTBXRqwDh5p044MJHrf&date=&lut=&isJSONP=true&_=1506409621930')
+                .then(function (resp) {
+                    timeLineDataJson = JSON.parse(resp.data.replace('callbackJSON(', '').replace(/\)$/g, ''));
+                    //get Stats data
+                    axios.get('http://www.hasilskor.com/API/JSON.aspx?callback=callbackJSON&sport=soccerDB&s=26PDpiffaaBbGrBdfgnrK2pknndskc1f3IMeKLW6PqdprBMHMqSTQ7gcmlcx7jZMxmyeTTBXRqwDh5p044MJHrf&date=&lut=&isJSONP=true&_=1506412139882')
+                        .then(function (resp) {
+                            var leagueName = [];
+                            for (var i = 0; i < liveScoreDataJson.data.r.length; i++) {
+                                if ($.inArray(liveScoreDataJson.data.r[i][5], leagueName) == (-1)) {
+                                    leagueName.push(liveScoreDataJson.data.r[i][5]);
+                                }
+                            }
+                            var leagueNameCl2 = leagueName.splice(0, Math.round(leagueName.length / 2));
+                            liveScoreData.league = leagueName;
+                            liveScoreData.leagueCol2 = leagueNameCl2;
+                            liveScoreData.liveScore = liveScoreDataJson.data.r;
+                            liveScoreData.timeLineData = timeLineDataJson;
+                            liveScoreData.statsData = JSON.parse(resp.data.replace('callbackJSON(', '').replace(/\)$/g, ''));
+                        }).catch(function (error) {
+
+                    });
+                }).catch(function (error) {
+                console.log(error);
+            });
+            /*var leagueName = [];
+             for (var i = 0; i < response.data.r.length; i++) {
+             if ($.inArray(response.data.r[i][5], leagueName) == (-1)) {
+             leagueName.push(response.data.r[i][5]);
+             }
+             }
+             var leagueNameCl2 = leagueName.splice(0, Math.round(leagueName.length / 2));
+             liveScoreData.league = leagueName;
+             liveScoreData.leagueCol2 = leagueNameCl2;
+             liveScoreData.liveScore = response.data.r;*/
             //setTimeout('getDataLiveScore()',10000);
         })
         .catch(function (error) {
@@ -201,22 +257,19 @@ function checkBoxDontAskMe() {
 function responsive() {
     var browserWidth = $(window).width();
     var browserHeight = $(window).height();
-    $('#contentInPlayPreGame').css('height',browserHeight-138);
-    $('#contentLiveScores').css('height',browserHeight-198);
-    $('.liveStreamDetail').css('height',browserHeight-300);
-    if($('.headerDetailLiveStream').css('display')=='none'){
-        //set height for col detail when have tab Back
-        $('#colDetail').css('height',browserHeight-64);
-        $('#stats').css('height',browserHeight-279);
-    }else{
-        $('#colDetail').css('height',browserHeight);
-        $('#stats').css('height',browserHeight-265);
-    }
+    $('#contentInPlayPreGame').css('height', browserHeight - 138);
+    $('#contentLiveScores').css('height', browserHeight - 198);
 
-    //$('#stats').css('height',browserHeight-320);
-    //$('#predictionDetail').css('height',browserHeight-64);
-    //$('#contentLiveScores').css('height',browserHeight-198);
-    //$('#colDetail').css('height',browserHeight);
+    if ($('.headerDetailLiveStream').css('display') == 'none') {
+        //set height for col detail when have tab Back
+        $('#colDetail').css('height', browserHeight - 64);
+        $('#stats').css('height', browserHeight - 279);
+        $('.liveStreamDetail').css('height', browserHeight - 132);
+    } else {
+        $('#colDetail').css('height', browserHeight);
+        $('#stats').css('height', browserHeight - 265);
+        $('.liveStreamDetail').css('height', browserHeight - 120);
+    }
 
     if ((window.innerWidth - document.documentElement.clientWidth) != 0) {
         if (browserWidth > 825) {
@@ -481,8 +534,12 @@ function closeWindowPreDetail() {
 
 
 function openLiveScoresDetail(obj) {
-    let data=liveScoreData.liveScore.find(x => x[0] == obj.id);
-    liveScoreData.sendDataDetail(data);
+    let dataDetail = {};
+    let data = liveScoreData.liveScore.find(x => x[0] == obj.id);
+    let statData = liveScoreData.statsData.r.find(x => x[2] == obj.id);
+    dataDetail['data'] = data;
+    dataDetail['statData'] = statData;
+    liveScoreData.sendDataDetail(dataDetail);
     $('#colDetailLiveScores div[class="noMatch"]').hide();
     $('#windowLiveScoresDetail').css('display', 'block');
     $('#colDetailLiveScores').css('display', 'block');
@@ -502,7 +559,7 @@ function openPredictionMatchDetail(el) {
     $('.inPlayButton').removeClass('inPlayButtonSelected');
     $('.preGameButton').removeClass('preGameButtonSelected');
     if ($(el).hasClass('preGameButton')) {
-        data=predictionData.preGame.find(x => x.match_code == el.id);
+        data = predictionData.preGame.find(x => x.match_code == el.id);
         $('.hederDetailInPlay').css('background-image', 'url("Assets/bg_header_match_pregame_detail.png")');
         $('#predictionDetail button[class="inPlayButton"]').css('background-image', 'url("Assets/bg_pre_game_item@2x.png")');
         $(el).addClass('preGameButtonSelected');
@@ -511,7 +568,7 @@ function openPredictionMatchDetail(el) {
             'color': '#8EC89F'
         });
     } else {
-        data=predictionData.inPlay.find(x => x.match_code == el.id);
+        data = predictionData.inPlay.find(x => x.match_code == el.id);
         $('.hederDetailInPlay').css('background-image', 'url("Assets/bg_header_match_detail.png")');
         $('#predictionDetail button[class="inPlayButton"]').css('background-image', 'url("Assets/bg_in_play_item@1x.png")');
         $(el).addClass('inPlayButtonSelected');

@@ -269,12 +269,12 @@
                                             <li onclick="openLiveScoresDetail(this)" :id="items[0]">
                                                 <div class="w3-row" style="padding: 5px 10px 5px 0px">
                                                     <div class="w3-col" :style="{'line-height':setLineHeight(items[4])}" style="width: 17%;">
-                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText"
+                                                        <div class="w3-row liveScoreText"
                                                              style="text-align: center">
-                                                            {{items[3]}}
+                                                            {{items[4]|setTime(items[10])}}
                                                         </div>
-                                                        <div class="w3-row liveScoreText" style="text-align: center">
-                                                            {{items[4]}}
+                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText" style="text-align: center">
+                                                            {{items[3]|setStatus}}
                                                         </div>
                                                     </div>
                                                     <div class="w3-col" style="width: 83%">
@@ -316,12 +316,12 @@
                                             <li onclick="openLiveScoresDetail(this)" :id="items[0]">
                                                 <div class="w3-row" style="padding: 5px 10px 5px 0px">
                                                     <div class="w3-col" :style="{'line-height':setLineHeight(items[4])}" style="width: 17%;">
-                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText"
+                                                        <div class="w3-row liveScoreText"
                                                              style="text-align: center">
-                                                            {{items[3]}}
+                                                            {{items[4]|setTime(items[10])}}
                                                         </div>
-                                                        <div class="w3-row liveScoreText" style="text-align: center">
-                                                            {{items[4]}}
+                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText" style="text-align: center">
+                                                            {{items[3]|setStatus}}
                                                         </div>
                                                     </div>
                                                     <div class="w3-col" style="width: 83%">

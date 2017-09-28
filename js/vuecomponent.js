@@ -349,7 +349,7 @@ Vue.component('predictiondetail', {
 });
 
 Vue.component('livescoredetail', {
-    template: `<div id="windowLiveScoresDetail" class="w3-animate-right" style="display: none;overflow-x: hidden">
+    template: `<div id="windowLiveScoresDetail" class="w3-animate-right" style="display: none;">
                         <div class="w3-row headerDetailLiveStream"
                              style="background-color: #fff;height: 50px;width: 100%">
                             <div class="w3-col" style="width: 50%;">
@@ -373,7 +373,7 @@ Vue.component('livescoredetail', {
                         <div class="w3-row" style="padding: 5px 10px 5px 0px;background-color: #fff">
                             <div class="w3-row" style="color: black;padding-bottom: 7px;padding-top: 7px">
                                 <div class="w3-col liveScoreText" style="width:20%;padding-left: 27px;font-size:12px;color: #36CC64">
-                                    '86
+                                    {{dataDetail[4]}}
                                 </div>
                                 <div class="w3-col" style="width:70%;color: #38619E">{{dataDetail[8]}}</div>
                                 <div class="w3-col"style="width:10%;text-align: right;padding-right: 10px;color: #38619E;">
@@ -421,7 +421,7 @@ Vue.component('livescoredetail', {
                                     <div class="w3-row">
                                         <div class="w3-col"
                                              style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
-                                            <span>27</span></div>
+                                            <span>{{setStats(dataStats[6],'home')}}</span></div>
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawLeftLine" width="30%">
                                         </div>
@@ -432,13 +432,12 @@ Vue.component('livescoredetail', {
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawRightLine" width="25%">
                                         </div>
-                                        <div class="w3-col"
-                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
-                                            24
+                                        <div class="w3-col" style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            {{setStats(dataStats[6],'away')}}
                                         </div>
                                     </div>
                                 </li>
-                                <li>
+                                <!--<li>
                                     <div class="w3-row">
                                         <div class="w3-col"
                                              style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
@@ -459,12 +458,12 @@ Vue.component('livescoredetail', {
                                             21
                                         </div>
                                     </div>
-                                </li>
+                                </li>-->
                                 <li>
                                     <div class="w3-row">
                                         <div class="w3-col"
                                              style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
-                                            <span>12</span></div>
+                                            <span> {{setStats(dataStats[37],'home')}}</span></div>
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawLeftLine" width="12%">
                                         </div>
@@ -476,9 +475,8 @@ Vue.component('livescoredetail', {
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawRightLine" width="15%">
                                         </div>
-                                        <div class="w3-col"
-                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
-                                            3
+                                        <div class="w3-col" style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                             {{setStats(dataStats[37],'away')}}
                                         </div>
                                     </div>
                                 </li>
@@ -486,7 +484,7 @@ Vue.component('livescoredetail', {
                                     <div class="w3-row">
                                         <div class="w3-col"
                                              style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
-                                            <span>3</span></div>
+                                            <span>{{setStats(dataStats[9],'home')}}</span></div>
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawLeftLine" width="80%">
                                         </div>
@@ -498,9 +496,8 @@ Vue.component('livescoredetail', {
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawRightLine" width="9%">
                                         </div>
-                                        <div class="w3-col"
-                                             style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
-                                            -
+                                        <div class="w3-col" style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
+                                            {{setStats(dataStats[9],'away')}}
                                         </div>
                                     </div>
                                 </li>
@@ -508,7 +505,7 @@ Vue.component('livescoredetail', {
                                     <div class="w3-row">
                                         <div class="w3-col"
                                              style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
-                                            <span>{{dataDetail[18]}}</span></div>
+                                            <span> {{setStats(dataStats[14],'home')}}</span></div>
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawLeftLine" width="10%">
                                         </div>
@@ -521,7 +518,7 @@ Vue.component('livescoredetail', {
                                             <hr class="drawRightLine" width="85%">
                                         </div>
                                         <div class="w3-col" style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
-                                            {{dataDetail[19]}}
+                                             {{setStats(dataStats[14],'away')}}
                                         </div>
                                     </div>
                                 </li>
@@ -529,7 +526,7 @@ Vue.component('livescoredetail', {
                                     <div class="w3-row">
                                         <div class="w3-col"
                                              style="width:5%;color: #616161;line-height: 3;padding-left: 10px;">
-                                            <span>{{dataDetail[16]}}</span></div>
+                                            <span>{{setStats(dataStats[16],'home')}}</span></div>
                                         <div class="w3-col" style="width:35%;">
                                             <hr class="drawLeftLine" width="25%">
                                         </div>
@@ -542,7 +539,7 @@ Vue.component('livescoredetail', {
                                             <hr class="drawRightLine" width="9%">
                                         </div>
                                         <div class="w3-col" style="width:5%;text-align: right;color: #616161;line-height: 3;padding-right: 10px;">
-                                            {{dataDetail[17]}}
+                                            {{setStats(dataStats[16],'away')}}
                                         </div>
                                     </div>
                                 </li>
@@ -712,13 +709,29 @@ Vue.component('livescoredetail', {
                 </div>`,
     data: function () {
         return {
-            dataDetail: {}
+            dataDetail: {},
+            dataStats: {}
         };
     },
 
     methods: {
         setDataDetail: function (val) {
-            this.dataDetail = val
+            this.dataDetail = val.data;
+            this.dataStats = val.statData;
+        },
+        setStats: function (val, homeaway) {
+            let stat = '';
+            if (val != undefined) {
+                switch (homeaway) {
+                    case 'home':
+                        stat = (val == '' ? 0 : val.split(',')[0]);
+                        break;
+                    case 'away':
+                        stat = (val == '' ? 0 : val.split(',')[1]);
+                        break
+                }
+            }
+            return stat;
         }
     },
     created(){
