@@ -1,4 +1,4 @@
-<!-- Version: 0.0.2 -->
+<!-- Version: 0.0.5 -->
 <!DOCTYPE html>
 <html>
 <title>Score Watch</title>
@@ -7,10 +7,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/score.css">
+<link rel="stylesheet" href="css/livecast.css">
 <link rel="stylesheet" href="css/marquee.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+
 <body>
 <div class="mainContent">
     <div class="mainMenu">
@@ -117,26 +122,30 @@
                                             <div class="w3-col timeInPlay" style="width:17%">{{item.match_dt|matchDate}}
                                             </div>
                                             <div class="w3-col teamHome" style="width:65%">{{ item.team_home}}</div>
-                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">{{
+                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">
+                                                {{
                                                 item.score_home }}
                                             </div>
                                         </div>
                                         <div class="w3-row" style="color: black;">
                                             <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
                                             <div class="w3-col teamAway" style="width:65%">{{ item.team_away }}</div>
-                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">{{
+                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">
+                                                {{
                                                 item.score_away }}
                                             </div>
                                         </div>
                                         <div class="w3-row">
                                             <button class="inPlayButton" onclick="openPredictionMatchDetail(this)"
-                                                   :id="item.match_code">
-                                                <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                                    :id="item.match_code">
+                                                <div class="w3-col"
+                                                     style="width:14%;text-align: left;padding-left: 5px">
                                                     <img src="Assets/icon_tick@1x.png" width="15"
                                                          style="margin-bottom: -4px;">
                                                 </div>
                                                 <div class="w3-col" style="width:66%;text-align: left;">
-                                                    <div class="marquee" v-show="(colWidth==320)&&item.team_home.length>=13"
+                                                    <div class="marquee"
+                                                         v-show="(colWidth==320)&&item.team_home.length>=13"
                                                          :style="{width:setWidth(item.team_home)}"
                                                          :data-marquee="item.team_home"
                                                          style="display: inline-block;height: 16px;font-weight: bold">
@@ -180,25 +189,30 @@
                                             <div class="w3-col timeInPlay" style="width:17%">{{item.match_dt|matchDate}}
                                             </div>
                                             <div class="w3-col teamHome" style="width:65%">{{ item.team_home }}</div>
-                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">{{
+                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">
+                                                {{
                                                 item.score_home}}
                                             </div>
                                         </div>
                                         <div class="w3-row" style="color: black;">
                                             <div class="w3-col timeInPlay" style="width:17%">Kickoff</div>
                                             <div class="w3-col teamAway" style="width:65%">{{ item.team_away }}</div>
-                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">{{
+                                            <div class="w3-col" style="width:18%;text-align: right;padding-right: 10px">
+                                                {{
                                                 item.score_away }}
                                             </div>
                                         </div>
                                         <div class="w3-row">
-                                            <button class="preGameButton" onclick="openPredictionMatchDetail(this)" :id="item.match_code">
-                                                <div class="w3-col" style="width:14%;text-align: left;padding-left: 5px">
+                                            <button class="preGameButton" onclick="openPredictionMatchDetail(this)"
+                                                    :id="item.match_code">
+                                                <div class="w3-col"
+                                                     style="width:14%;text-align: left;padding-left: 5px">
                                                     <img src="Assets/icon_tick@1x.png" width="15"
                                                          style="margin-bottom: -4px;">
                                                 </div>
                                                 <div class="w3-col" style="width:66%;text-align: left;">
-                                                    <div class="marquee" v-show="(colWidth==320)&&item.team_home.length>=13"
+                                                    <div class="marquee"
+                                                         v-show="(colWidth==320)&&item.team_home.length>=13"
                                                          :style="{width:setWidth(item.team_home)}"
                                                          :data-marquee="item.team_home"
                                                          style="display: inline-block;height: 16px;font-weight: bold">
@@ -242,20 +256,32 @@
                     <img src="Assets/noMatch.png"
                          style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;">
                 </div>
-                <predictiondetail></predictiondetail>
-                <!--
-                <div class="footerDetail" style="text-align: center;font-size: 12px;padding-top: 25px;">
-                    <span>Made by AMSB. All Right Reserved. &copy; 2017.</span>
-                </div>-->
+                <predictiondetail ref="predictiondetail"></predictiondetail>
             </div>
             <div class="mask" onclick="closeWindowPreDetail()"></div>
         </div>
         <div id="liveScores">
             <div style="width: 100%;position: relative;padding-bottom: 74px;">
-                <div style="background-color: #aaa;height: 60px;width: 100%;text-align:center;line-height: 3;font-size: 20px;font-weight: bold">
-                    calendar
+                <div style="height: 60px;width: 100%;font-size: 12px;display: inline-flex;">
+                    <div style="width: 30px;height: 60px">
+                        <i class="material-icons" onclick="next_day()" style="font-size:30px;color:#38619E;position: absolute;left: 0;top: 21px;cursor: pointer;">keyboard_arrow_left</i>
+                    </div>
+                    <div id="calendar"  style="flex: 1;height: 60px;overflow-x: hidden;position: relative">
+                        <ul style="list-style: none;padding: 9px 0px 0px 0px;margin: 0;height: 60px;white-space: nowrap;width: 100%;position: absolute">
+                            <li v-for="item in dateOfMonth" style="padding: 0px 15px 0px 15px;display: inline-block;text-align: center;cursor: pointer"  @click="setActiveCalendar(item.year,item.month,item.date,$event)">
+                                <span style="font-size: 16px" :style="{'font-weight':(item.dayName=='Today'?'bold':'normal'),'color':(item.dayName=='Today'?'#38619E':'#C2CFE1')}">{{item.monthName+'-'+item.date}}</span><br>
+                                <span style="color:#C2CFE1;font-size: 12px">{{item.dayName}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="width: 30px;height: 60px">
+                        <i class="material-icons" onclick="pre_day()" style="font-size:30px;color:#38619E;position: absolute;right: 0;top: 21px;cursor: pointer;">keyboard_arrow_right</i>
+                    </div>
                 </div>
                 <div id="contentLiveScores" class="w3-row" style="flex: 1">
+                    <div v-show="league.length==0" style="text-align: center;font-size: 30px;font-weight: bold;top: 0;bottom: 0;left: 0;margin: auto;position: absolute;right: 0;height: 30px;color: #A6A6A6;">
+                        <span>NO MATCHES</span>
+                    </div>
                     <div id="centerLiveScores">
                         <div class="w3-col colInPlay">
                             <template v-for="item in league">
@@ -268,12 +294,14 @@
                                         <template v-for="items in liveScore" v-if="items[5]==item">
                                             <li onclick="openLiveScoresDetail(this)" :id="items[0]">
                                                 <div class="w3-row" style="padding: 5px 10px 5px 0px">
-                                                    <div class="w3-col" :style="{'line-height':setLineHeight(items[4])}" style="width: 17%;">
+                                                    <div class="w3-col" :style="{'line-height':setLineHeight(items[4])}"
+                                                         style="width: 17%;">
                                                         <div class="w3-row liveScoreText"
                                                              style="text-align: center">
                                                             {{items[4]|setTime(items[10])}}
                                                         </div>
-                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText" style="text-align: center">
+                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText"
+                                                             style="text-align: center">
                                                             {{items[3]|setStatus}}
                                                         </div>
                                                     </div>
@@ -315,12 +343,14 @@
                                         <template v-for="items in liveScore" v-if="items[5]==item">
                                             <li onclick="openLiveScoresDetail(this)" :id="items[0]">
                                                 <div class="w3-row" style="padding: 5px 10px 5px 0px">
-                                                    <div class="w3-col" :style="{'line-height':setLineHeight(items[4])}" style="width: 17%;">
+                                                    <div class="w3-col" :style="{'line-height':setLineHeight(items[4])}"
+                                                         style="width: 17%;">
                                                         <div class="w3-row liveScoreText"
                                                              style="text-align: center">
                                                             {{items[4]|setTime(items[10])}}
                                                         </div>
-                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText" style="text-align: center">
+                                                        <div v-show="items[4]!='FT'" class="w3-row liveScoreText"
+                                                             style="text-align: center">
                                                             {{items[3]|setStatus}}
                                                         </div>
                                                     </div>
@@ -362,7 +392,12 @@
                         src="Assets/noMatch.png"
                         style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;">
                 </div>
-                <livescoredetail></livescoredetail>
+                <livescoredetail>
+                    <template scope="{msg}">
+                        <sub-component :msg="msg"></sub-component>
+                    </template>
+
+                </livescoredetail>
             </div>
             <div class="mask" onclick="closeWindowLiveScoresDetail('windowLiveScoresDetail')"></div>
         </div>
@@ -420,7 +455,8 @@
                 </ul>
             </div>
             <div style="text-align: center;padding: 40px" id="groupButtonLogin">
-                <button class="w3-button" onclick="loginFaceBook()" style="background-color: #fff;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%;margin-bottom: 15px">
+                <button class="w3-button" onclick="loginFaceBook()"
+                        style="background-color: #fff;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%;margin-bottom: 15px">
                     <div style="float: left;padding-top: 6px;color:#3C5A98;"><span>LOGIN WITH FACEBOOK</span></div>
                     <div style="float: right">
                         <img src="Assets/icon_fb.png">
@@ -561,7 +597,9 @@
                     popups are enabled.</p>
             </div>
             <div style="padding-left: 18px;color:#A6A6A6 ; padding-bottom: 20px;">
-                <input id="ckdontask" class="w3-check" type="checkbox" style="top:5px;width: 20px;height: 20px"><span style="cursor: pointer;padding-left: 5px" onclick="checkBoxDontAskMe();">Don't ask me again</span><br>
+                <input id="ckdontask" class="w3-check" type="checkbox" style="top:5px;width: 20px;height: 20px"><span
+                    style="cursor: pointer;padding-left: 5px"
+                    onclick="checkBoxDontAskMe();">Don't ask me again</span><br>
             </div>
             <div class="w3-row" style="border-top: 1px solid #F0F0F0;height: 51px">
                 <div class="w3-col" style="width: 50%;height:100%;border-right: 1px solid #F0F0F0">
@@ -571,7 +609,7 @@
                     </button>
                 </div>
                 <div class="w3-col" style="width: 50%;height:100%;">
-                    <button onclick="closeNotification('openNewTab');" class="btOptions"
+                    <button onclick="openNewTab(); return false" class="btOptions"
                             style="border-bottom-right-radius: 4px;">
                         YES,OPEN
                     </button>
@@ -994,7 +1032,8 @@
     </div>
 </div>
 <div id="menuSideBar" class="sideBar" onclick="closeMenuSideBar();">
-    <div style="background-color: #fff;max-width: 360px;height: 100%;" class="bgMenuSideBar" onclick="event.cancelBubble=true;">
+    <div style="background-color: #fff;max-width: 360px;height: 100%;" class="bgMenuSideBar"
+         onclick="event.cancelBubble=true;">
         <div style="position: relative;margin-bottom: 15px;background-color: #fff">
             <img src="Assets/logo@1x.png" width="293" height="92" style="margin-top: 22px">
             <a class="btnClose" onclick="closeMenuSideBar();">&times</a>
@@ -1049,8 +1088,9 @@
     </div>
 </div>
 <script src="js/axios.js"></script>
-<script src="js/jquery.js"></script>
+
 <script src="js/vue.js"></script>
+<script src="js/vue-resize.js"></script>
 <script src="js/vuecomponent.js"></script>
 <script src="js/data.js"></script>
 <script src="js/score.js"></script>

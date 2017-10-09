@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Score Watch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="Assets/Favicon/favicon-32x32.png"/>
+    <script src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/score.css">
+    <script src="js/vue.js"></script>
+    <script src="js/vuecomponent.js"></script>
+
+</head>
+<body>
+<div id="detailId" style="width: 560px;margin: auto">
+    <predictiondetail style="display: block !important;" ref="predictiondetail"></predictiondetail>
+</div>
+<script>
+    window.Event = new class {
+        constructor() {
+            this.vue = new Vue();
+        }
+
+        fire(event, data = null) {
+            this.vue.$emit(event, data);
+        }
+
+        listen(event, callback) {
+            this.vue.$on(event, callback);
+        }
+    };
+    let prediction=new Vue({
+        el:'#detailId'
+    });
+    $(function () {
+        prediction.$refs.predictiondetail.dataDetail=window.predetaildata.data;
+        $('.headerDetailLiveStream').css('display','none');
+        if(window.predetaildata.prediction=='pregame'){
+            $('.hederDetailInPlay').css('background-image', 'url("Assets/bg_header_match_pregame_detail.png")');
+            $('#predictionDetail button[class="inPlayButton"]').css('background-image', 'url("Assets/bg_pre_game_item@2x.png")');
+        }
+    })
+
+</script>
+</body>
+</html>

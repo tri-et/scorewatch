@@ -588,6 +588,7 @@ body {
 }
 .liveStreamDetail{
     overflow-x: hidden;
+    background-color: #fff !important;
 }
 .textAbout {
     height: 110px;

@@ -3,6 +3,9 @@
  */
 let predictionData;
 let liveScoreData;
+let dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+let newWindow;
 window.Event = new class {
     constructor() {
         this.vue = new Vue();
@@ -16,7 +19,6 @@ window.Event = new class {
         this.vue.$on(event, callback);
     }
 };
-
 predictionData = new Vue({
     el: '#content',
     data: {
@@ -48,18 +50,23 @@ predictionData = new Vue({
         },
     },
     mounted(){
-        getDataPrediction();
+        get_pregame_prediction();
+        get_inplay_prediction();
     }
 });
 
 liveScoreData = new Vue({
     el: '#liveScores',
+    /*components:{
+     'sub-component':liveCast
+     },*/
     data: {
         league: [],
         leagueCol2: [],
         liveScore: [],
         timeLineData: [],
-        statsData: []
+        statsData: [],
+        dateOfMonth: []
     },
     filters: {
         setStatus: function (v) {
@@ -78,13 +85,17 @@ liveScoreData = new Vue({
         },
         setTime: function (v, time) {
             let times = v;
-            switch (v){
+            switch (v) {
                 case '':
-                    let date=new Date(time);
-                    times=date.getHours()+':'+date.getMinutes();
+                    let date = new Date(time);
+                    times = date.getHours() + ':' + (date.getMinutes() == '0' ? '00' : date.getMinutes());
                     break;
-            };
+            }
+            ;
             return times;
+        },
+        formatCalendar: function (v) {
+            return new Date(v).getMonth()
         }
     },
     methods: {
@@ -93,16 +104,41 @@ liveScoreData = new Vue({
         },
         sendDataDetail: function (val) {
             Event.fire('livescoreDetail', val);
+        },
+        setActiveToday: function (val) {
+            return val == 'Today' ? 'bold' : 'none'
+        },
+        setActiveCalendar: function (y, m, d,e) {
+            let currentdate=new Date();
+            let date = y + '-' + m + '-' + d;
+            $($($(e.currentTarget).parent()[0]).find('li>span')).css('font-weight','normal');
+            $($($(e.currentTarget).parent()[0]).find('li>span')).css('color','#C2CFE1');
+            $($(e.currentTarget).find('span')[0]).css('font-weight','bold');
+            $($(e.currentTarget).find('span')[0]).css('color','#38619E');
+            if(currentdate.getDate()==d&&currentdate.getMonth()+1==m){
+                getDataLiveScore();
+            }else{
+                get_livescore_by_date(date);
+            }
+
         }
     },
     mounted(){
         getDataLiveScore();
+        this.dateOfMonth = getDateOfMoth();
     }
 });
 /*Set Active For Menu*/
 
 
 $(function () {
+    $("#datepicker").datepicker({
+        //beforeShow: addCustomInformation,
+        onChangeMonthYear: function () {
+            setTimeout(addCustomInformation, 100);
+        }
+    });
+
     $('.mainMenu ul li:not(.menuRight):not(:first-child)').click(function () {
         if (!$('.iconMenu').is(':hidden')) {
             openMenuSideBar();
@@ -228,6 +264,54 @@ function getDataLiveScore() {
             console.log(error);
         });
 }
+function get_livescore_by_date(date) {
+    $.ajax({
+        url: 'http://www.hasilskor.com/API/JSON.aspx?date=' + date + '&sport=soccer&s=26PDpiffaaBbGrBdfgnrK2pknndskc1f3IMeKLW6PqdprBMHMqSTQ7gcmlcx7jZMxmyeTTBXRqwDh5p044MJHrf',
+        success: function (response) {
+            let liveScoreDataJson = response;
+            var leagueName = [];
+            for (var i = 0; i < liveScoreDataJson.r.length; i++) {
+                if ($.inArray(liveScoreDataJson.r[i][5], leagueName) == (-1)) {
+                    leagueName.push(liveScoreDataJson.r[i][5]);
+                }
+            }
+            var leagueNameCl2 = leagueName.splice(0, Math.round(leagueName.length / 2));
+            liveScoreData.league = leagueName;
+            liveScoreData.leagueCol2 = leagueNameCl2;
+            liveScoreData.liveScore = liveScoreDataJson.r;
+        },
+        error: function (error) {
+            liveScoreData.league = [];
+            liveScoreData.leagueCol2 = [];
+            liveScoreData.liveScore = [];
+        }
+    })
+}
+function get_pregame_prediction() {
+    $.ajax({
+        url: 'http://www.underground.tips/service/get_Pregame_prediction',
+        jsonp: 'callback',
+        dataType: 'jsonp',
+        success: function (response) {
+            let data = JSON.parse(response);
+            predictionData.preGame = data.Pregame;
+
+            setTimeout('get_pregame_prediction()', 600000);
+        }
+    })
+}
+function get_inplay_prediction() {
+    $.ajax({
+        url: 'http://www.underground.tips/service/get_Running_prediction',
+        jsonp: 'callback',
+        dataType: 'jsonp',
+        success: function (response) {
+            let data = JSON.parse(response);
+            predictionData.inPlay = data.Running;
+            setTimeout('get_inplay_prediction()', 180000);
+        }
+    })
+}
 function resizeInputSearch() {
     var width = 0;
     $('.mainMenu ul li[class="menuRight"]:not(:hidden):not(:last-child)').each(function () {
@@ -258,7 +342,13 @@ function responsive() {
     var browserWidth = $(window).width();
     var browserHeight = $(window).height();
     $('#contentInPlayPreGame').css('height', browserHeight - 138);
-    $('#contentLiveScores').css('height', browserHeight - 198);
+    $('#contentLiveScores').css('height', browserHeight - 205);// set height for content live score
+
+    //start set position scroll calendar
+    let outer = $('#calendar ul').width();
+    let inner = $('#calendar').get(0).scrollWidth;
+    $('#calendar').scrollLeft(((inner - outer) / 2) + 100);
+    //end set position scroll calendar
 
     if ($('.headerDetailLiveStream').css('display') == 'none') {
         //set height for col detail when have tab Back
@@ -537,8 +627,10 @@ function openLiveScoresDetail(obj) {
     let dataDetail = {};
     let data = liveScoreData.liveScore.find(x => x[0] == obj.id);
     let statData = liveScoreData.statsData.r.find(x => x[2] == obj.id);
+    let timeLineData = findTimeLineMatch(liveScoreData.timeLineData.r, obj.id); //liveScoreData.timeLineData.r.find(x => x[2] == obj.id);
     dataDetail['data'] = data;
-    dataDetail['statData'] = statData;
+    dataDetail['statData'] = (statData == undefined ? [] : statData);
+    dataDetail['timeLineData'] = timeLineData;
     liveScoreData.sendDataDetail(dataDetail);
     $('#colDetailLiveScores div[class="noMatch"]').hide();
     $('#windowLiveScoresDetail').css('display', 'block');
@@ -553,7 +645,15 @@ function openLiveScoresDetail(obj) {
     $(obj).addClass('selectedLiveScore');
     $('#windowLiveScoresDetail').addClass('slide-in-right');
 }
-
+function findTimeLineMatch(listMatch, matchId) {
+    let result = [];
+    for (let i = 0; i < listMatch.length; i++) {
+        if (listMatch[i][2] == matchId) {
+            result.push(listMatch[i]);
+        }
+    }
+    return result;
+}
 function openPredictionMatchDetail(el) {
     var data;
     $('.inPlayButton').removeClass('inPlayButtonSelected');
@@ -562,6 +662,7 @@ function openPredictionMatchDetail(el) {
         data = predictionData.preGame.find(x => x.match_code == el.id);
         $('.hederDetailInPlay').css('background-image', 'url("Assets/bg_header_match_pregame_detail.png")');
         $('#predictionDetail button[class="inPlayButton"]').css('background-image', 'url("Assets/bg_pre_game_item@2x.png")');
+        $('#predictionDetail').attr('data-prediction','pregame');
         $(el).addClass('preGameButtonSelected');
         $('.footerDetail').css({
             'background-image': 'url("Assets/bg_pre_game_item@2x.png")',
@@ -571,6 +672,7 @@ function openPredictionMatchDetail(el) {
         data = predictionData.inPlay.find(x => x.match_code == el.id);
         $('.hederDetailInPlay').css('background-image', 'url("Assets/bg_header_match_detail.png")');
         $('#predictionDetail button[class="inPlayButton"]').css('background-image', 'url("Assets/bg_in_play_item@1x.png")');
+        $('#predictionDetail').attr('data-prediction','inplay');
         $(el).addClass('inPlayButtonSelected');
         $('.footerDetail').css({
             'background-image': 'url("Assets/bg_in_play_item@1x.png")',
@@ -606,8 +708,46 @@ function openTabMenu(menuId) {
     //closeMenuSideBar();
     $('.mainContent>div[class="w3-row"]>div').hide()
     $('.mainContent>div[class="w3-row"]>div[id=' + menuId + ']').css('display', 'flex');
+    if (menuId == 'liveScores') {
+        let outer = $('#calendar ul').width();
+        let inner = $('#calendar').get(0).scrollWidth;
+        $('#calendar').scrollLeft(((inner - outer) / 2) + 95);
+    }
 }
-
+function getDateOfMoth() {
+    let days = [];
+    for (let i = -30; i < 0; i++) {
+        let currentDate = new Date();
+        let date = new Date(currentDate);
+        let newDate = new Date(date.setDate(date.getDate() + i));
+        days.push({
+            'year': newDate.getFullYear(),
+            'dayName': dayName[newDate.getDay()],
+            'date': newDate.getDate(),
+            'month': newDate.getMonth() + 1,
+            'monthName': months[newDate.getMonth()]
+        });
+    }
+    for (let i = 0; i < 30; i++) {
+        let currentDate1 = new Date();
+        let date = new Date(currentDate1);
+        let newDate = new Date(date.setDate(date.getDate() + i));
+        days.push({
+            'year': newDate.getFullYear(),
+            'dayName': newDate.getDate() == currentDate1.getDate() ? 'Today' : dayName[newDate.getDay()],
+            'date': newDate.getDate(),
+            'month': newDate.getMonth() + 1,
+            'monthName': months[newDate.getMonth()]
+        });
+    }
+    return days;
+}
+function next_day() {
+    $('#calendar').animate({scrollLeft: "-=" + 95});
+}
+function pre_day() {
+    $('#calendar').animate({scrollLeft: "+=" + 95});
+}
 function openTabMenuSideBar(menuId) {
     if (menuId == 'liveScores') {
         $('.mainMenu ul li:nth-child(2) a span:nth-child(2)').text('live scores');
@@ -635,11 +775,19 @@ function openTabMenuSideBar(menuId) {
 function learMore(obj) {
     $(obj).closest('div').prev().animate({height: '227px'}, 500)
 }
-
 function clearText() {
     $('#searchDiv input').val('');
     $('#searchDiv input').css('box-shadow', '0px 2px 0px 0px rgba(0, 0, 0,0.2)');
     //$('.clearText').css('visibility', 'hidden');
+}
+
+function openNewTab() {
+    newWindow=window.open('detailprediction.html','_blank');
+    newWindow.predetaildata={
+        'data':predictionData.$refs.predictiondetail.$data.dataDetail,
+        'prediction':$('#predictionDetail').attr('data-prediction')
+    };
+    closeNotification('openNewTab');
 }
 
 
