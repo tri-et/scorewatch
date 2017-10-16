@@ -58,13 +58,9 @@ Vue.component('predictiondetail', {
                                 </button>
                             </div>
                             <div class="w3-row" id="statslivestream"
-                                 style="color: #B5C0D7;font-weight: bold;font-size: 11px;margin-top: 5px;text-align: center;padding-top: 38px;cursor: pointer">
-                                <div class="w3-col activeStatsLiveStream" style="width: 50%"
-                                     onclick="openStatsLiveStream('stats',this)">STATS
-                                </div>
-                                <div class="w3-col" style="width: 50%;"
-                                     onclick="openStatsLiveStream('livestream',this)">LIVE STREAM
-                                </div>
+                                 style="color: #B5C0D7;font-weight: bold;font-size: 11px;margin-top: 5px;text-align: center;padding-top: 17px;cursor: pointer;height:75px">
+                                <div class="w3-col activeStatsLiveStream" style="width: 50%;height:58px;line-height:5" onclick="openStatsLiveStream('stats',this)">STATS</div>
+                                <div class="w3-col" style="width: 50%;height:58px;line-height:5" onclick="openStatsLiveStream('livestream',this)">LIVE STREAM</div>
                             </div>
                         </div>
                         <div id="stats">
@@ -349,7 +345,7 @@ Vue.component('predictiondetail', {
 });
 Vue.component('sub-component',{
     template: `
-    <div class="ip-RHSMediaView ipe-RHSMediaView " style="height: auto;margin:0 auto;background-color: #545454;">
+    <div class="ip-RHSMediaView ipe-RHSMediaView" v-show="msg[3]!=0" style="height: auto;margin:0 auto;background-color: #545454;">
                         <div class="ipe-RHSMediaView_MediaWrapper " style="width:320px;margin:auto">
                             <div class="ip-MatchLiveContainer" style="width:320px;background-color:#404040">
                                 <div class="EventViewTitle" style="display: none;">
@@ -597,7 +593,7 @@ Vue.component('sub-component',{
     props:['msg'],
 });
 Vue.component('livescoredetail', {
-    template: `<div id="windowLiveScoresDetail" class="w3-animate-right" style="display: none;">
+    template: `<div id="windowLiveScoresDetail" style="display: none;">
                         <div class="w3-row headerDetailLiveStream"
                              style="background-color: #fff;height: 50px;width: 100%">
                             <div class="w3-col" style="width: 50%;">
@@ -620,19 +616,19 @@ Vue.component('livescoredetail', {
                         </div>
                         <div class="w3-row" style="padding: 5px 10px 5px 0px;background-color: #fff">
                             <div class="w3-row" style="color: black;padding-bottom: 7px;padding-top: 7px">
-                                <div class="w3-col liveScoreText" style="width:20%;padding-left: 27px;font-size:12px;color: #36CC64">
-                                    {{dataDetail[4]|setTimeLive}}
+                                <div class="w3-col liveScoreText" :style="{width:setWidthTeam(dataDetail[3],'state')}" style="padding-left: 27px;font-size:12px;color: #36CC64">
+                                    {{dataDetail[4]|setTimeLive(dataDetail[8])}}
                                 </div>
-                                <div class="w3-col" style="width:70%;color: #38619E">{{dataDetail[8]}}</div>
+                                <div class="w3-col" :style="{width:setWidthTeam(dataDetail[3],'homeaway')}" style="color: #38619E">{{dataDetail[3]=='0'?'':dataDetail[8]}}</div>
                                 <div class="w3-col"style="width:10%;text-align: right;padding-right: 10px;color: #38619E;">
                                     {{dataDetail[12]}}
                                 </div>
                             </div>
                             <div class="w3-row" style="color: black;">
-                                <div class="w3-col" style="width:20%;padding-left: 22px;color: #36CC64;font-size:12px;">
-                                    LIVE
+                                <div class="w3-col" :style="{width:setWidthTeam(dataDetail[3],'state')}" style="padding-left: 22px;color: #36CC64;font-size:12px;">
+                                    {{dataDetail[3]=='0'?dataDetail[9]:'Live'}}
                                 </div>
-                                <div class="w3-col liveScoreText" style="width:70%;color: #38619E">{{dataDetail[9]}}</div>
+                                <div class="w3-col liveScoreText" :style="{width:setWidthTeam(dataDetail[3],'homeaway')}" style="color: #38619E">{{dataDetail[3]=='0'?'':dataDetail[9]}}</div>
                                 <div class="w3-col liveScoreText" style="width:10%;text-align: right;padding-right: 10px;color: #38619E;">
                                     {{dataDetail[13]}}
                                 </div>
@@ -652,7 +648,7 @@ Vue.component('livescoredetail', {
                                     <span>{{dataDetail[5]}}</span></div>
                             </div>
                         </div>
-                        <div class="w3-row headerLiveScoresDetail" v-show="dataStats.length>0" style="text-align: center;text-shadow:rgba(0,0,0,0.54) 1px 1px 4px;color: #fff;height: 53px">
+                        <div class="w3-row headerLiveScoresDetail" v-show="dataStats.length>0||(dataStats.length==0&&dataDetail[3]==0)" style="text-align: center;text-shadow:rgba(0,0,0,0.54) 1px 1px 4px;color: #fff;height: 53px">
                             <div class="w3-col"
                                  style="width: 25%;font-size: 12px;text-align: left;padding-left: 20px;padding-top: 19px">
                                 <span>HOME</span></div>
@@ -661,6 +657,12 @@ Vue.component('livescoredetail', {
                             <div class="w3-col"
                                  style="width: 25%;text-align: right;padding-right: 20px;font-size: 12px;padding-top: 19px">
                                 <span>AWAY</span></div>
+                        </div>
+                        <div v-show="dataDetail[3]==0" style="text-align:center;font-size:20px;font-weight:bold;color:rgb(166, 166, 166);">
+                            <img src="Assets/nodata.png" style="margin-top: 15px" /></br>
+                            <div style="width: 181px;margin: auto;font-size: 14px;font-weight: normal;margin-bottom: 15px;">
+                                Stats will be shown here when the match starts, in {{dataDetail[10]|setMatchDate}}
+                            </div>
                         </div>
                         <div id="statsDetail" v-show="dataStats.length>0">
                             <ul>
@@ -791,7 +793,7 @@ Vue.component('livescoredetail', {
                                 </li>
                             </ul>
                         </div>
-                        <div class="w3-row headerLiveScoresDetail" v-show="dataTimeLine.length>0" style="text-align: center;text-shadow:rgba(0,0,0,0.54) 1px 1px 4px;color: #fff;height: 53px">
+                        <div class="w3-row headerLiveScoresDetail" v-show="dataTimeLine.length>0||(dataTimeLine.length==0&&dataDetail[3]==0)" style="text-align: center;text-shadow:rgba(0,0,0,0.54) 1px 1px 4px;color: #fff;height: 53px">
                             <div class="w3-col"
                                  style="width: 25%;font-size: 12px;text-align: left;padding-left: 20px;padding-top: 19px">
                                 <span>HOME</span></div>
@@ -801,24 +803,29 @@ Vue.component('livescoredetail', {
                                  style="width: 25%;text-align: right;padding-right: 20px;font-size: 12px;padding-top: 19px">
                                 <span>AWAY</span></div>
                         </div>
+                        <div v-show="dataDetail[3]==0" style="text-align:center;font-size:20px;font-weight:bold;color:rgb(166, 166, 166);">
+                            <img src="Assets/nodata.png" style="margin-top: 15px" /></br>
+                                <div style="width: 181px;margin: auto;font-size: 14px;font-weight: normal;margin-bottom: 15px;">
+                                    TimeLine will be shown here when the match starts, in {{dataDetail[10]|setMatchDate}}
+                                </div>
+                         </div>
                         <div id="timeLineDetail">
                             <ul>
                                 <li v-for="item in dataTimeLine">
                                     <div class="w3-row">
-                                        <div class="w3-col"
-                                             style="width:10%;color: #616161;line-height: 3;padding-left: 10px;">
+                                        <div class="w3-col" style="width:10%;color: #616161;line-height: 3;padding-left: 10px;">
                                             <img :src="item[4]|setIconTimeLine('home',item[3])" width="10"></div>
-                                        <div class="w3-col" style="width:35%;padding-top: 15px">
-                                            <span>{{item[6]|showHidePlayerTimeLine('home',item[3])}}</span>
+                                        <div class="w3-col player" style="width:35%;height: 45px;padding-top: 14px">
+                                            <p style="margin:0;white-space: nowrap">{{item[6]|showHidePlayerTimeLine('home',item[3])}}</p>
                                         </div>
                                         <div class="w3-col" style="width:10%;color:#C5C5C5;padding-top: 15px;text-align: center">
                                         {{item[5]+"'"}}
                                         </div>
-                                        <div class="w3-col" style="width:35%;text-align: right;padding-top: 15px">
-                                        <span>{{item[6]|showHidePlayerTimeLine('away',item[3])}}</span>
+                                        <div class="w3-col player" style="width:35%;text-align: right;height: 45px;padding-top: 14px">
+                                        <p style="margin:0;white-space: nowrap">{{item[6]|showHidePlayerTimeLine('away',item[3])}}</p>
                                         </div>
                                         <div class="w3-col"
-                                             style="width:10%;text-align: right;color: #616161;padding-top: 15px;padding-right: 10px;">
+                                             style="width:10%;text-align: right;color: #616161;padding-top: 10px;padding-right: 10px;">
                                              <img :src="item[4]|setIconTimeLine('away',item[3])" width="10">
                                         </div>
                                     </div>
@@ -826,8 +833,7 @@ Vue.component('livescoredetail', {
 
                             </ul>
                         </div>
-                        <div class="w3-row headerLiveScoresDetail"
-                             style="text-align: center;text-shadow:rgba(0,0,0,0.54) 1px 1px 4px;color: #fff;height: 53px">
+                        <div class="w3-row headerLiveScoresDetail" v-show="dataDetail[3]!=0" style="text-align: center;text-shadow:rgba(0,0,0,0.54) 1px 1px 4px;color: #fff;height: 53px">
                             <div class="w3-col" style="width: 100%;font-size: 16px;font-weight: 600;padding-top: 15px">
                                 <span>LIVESTREAM</span></div>
                         </div>
@@ -861,8 +867,23 @@ Vue.component('livescoredetail', {
             dataTimeLine: {}
         };
     },
-
+    mounted(){
+      this.$nextTick(function () {
+          window.addEventListener('resize',this.getDivWidth);
+          this.getDivWidth();
+      })
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.getDivWidth);
+    },
     methods: {
+        getDivWidth(){
+            let widthDivPlayer=$('.player');
+            console.log(widthDivPlayer);
+            if(widthDivPlayer!=undefined){
+
+            }
+        },
         setDataDetail: function (val) {
             this.dataDetail = val.data;
             this.dataStats = val.statData;
@@ -884,16 +905,34 @@ Vue.component('livescoredetail', {
         },
         setWidthStat: function (v) {
             return (parseInt(v) * 100 / 30) + '%';
+        },
+        setWidthTeam:function (state,homeAway) {
+            let widthTeam='';
+            if(state==0&&homeAway=='state'){
+                widthTeam='90%';
+            }else if(state!=0&&homeAway=='state'){
+                widthTeam='20%';
+            }
+
+            if(state==0&&homeAway=='homeaway'){
+                widthTeam='0%';
+            }else if(state!=0&&homeAway=='homeaway'){
+                widthTeam='70%';
+            }
+            return widthTeam;
         }
     },
     filters: {
+        setTimeLive:function(v,homeAway){
+            return v==''?homeAway:v+"'"
+        },
         setMatchDate:function (v) {
             let date=new Date(v);
             return date.getHours()+':'+(date.getMinutes()=='0'?'00':date.getMinutes());
         },
-        setTimeLive: function (v) {
+        /*setTimeLive: function (v) {
             return v == "" ? '0\'' : v;
-        },
+        },*/
         showHidePlayerTimeLine: function (v, homeaway, number) {
             let player;
             if (homeaway == 'home') {

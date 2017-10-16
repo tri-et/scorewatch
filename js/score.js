@@ -32,6 +32,22 @@ predictionData = new Vue({
             return date.getHours() + ':' + date.getMinutes();
         }
     },
+    watch: {
+        'preGame': function (newVal, oldVal) {
+            let newMatch = newVal.length - oldVal.length;
+            if (newMatch > 0 && oldVal.length != 0) {
+                $('#badgepregame').text('+ New');
+                $('#badgepregame').css('display', 'block');
+            }
+        },
+        'inPlay': function (newVal, oldVal) {
+            let newMatch = newVal.length - oldVal.length;
+            if (newMatch > 0 && oldVal.length != 0) {
+                $('#badgeinplay').text('+ New');
+                $('#badgeinplay').css('display', 'block');
+            }
+        }
+    },
     methods: {
         setWidth: function (value) {
             var widthDiv = '';
@@ -57,9 +73,6 @@ predictionData = new Vue({
 
 liveScoreData = new Vue({
     el: '#liveScores',
-    /*components:{
-     'sub-component':liveCast
-     },*/
     data: {
         league: [],
         leagueCol2: [],
@@ -98,6 +111,15 @@ liveScoreData = new Vue({
             return new Date(v).getMonth()
         }
     },
+    watch: {
+        'liveScore': function (newVal, oldVal) {
+            let newmatch = newVal.length - oldVal.length;
+            if (newmatch > 0 && oldVal.length != 0) {
+                $('#badgelivescore').text('+ New');
+                $('#badgelivescore').css('display', 'block');
+            }
+        }
+    },
     methods: {
         setLineHeight: function (val) {
             return val == 'FT' ? 3 : 'none'
@@ -108,16 +130,16 @@ liveScoreData = new Vue({
         setActiveToday: function (val) {
             return val == 'Today' ? 'bold' : 'none'
         },
-        setActiveCalendar: function (y, m, d,e) {
-            let currentdate=new Date();
+        setActiveCalendar: function (y, m, d, e) {
+            let currentdate = new Date();
             let date = y + '-' + m + '-' + d;
-            $($($(e.currentTarget).parent()[0]).find('li>span')).css('font-weight','normal');
-            $($($(e.currentTarget).parent()[0]).find('li>span')).css('color','#C2CFE1');
-            $($(e.currentTarget).find('span')[0]).css('font-weight','bold');
-            $($(e.currentTarget).find('span')[0]).css('color','#38619E');
-            if(currentdate.getDate()==d&&currentdate.getMonth()+1==m){
+            $($($(e.currentTarget).parent()[0]).find('li>span')).css('font-weight', 'normal');
+            $($($(e.currentTarget).parent()[0]).find('li>span')).css('color', '#C2CFE1');
+            $($(e.currentTarget).find('span')[0]).css('font-weight', 'bold');
+            $($(e.currentTarget).find('span')[0]).css('color', '#38619E');
+            if (currentdate.getDate() == d && currentdate.getMonth() + 1 == m) {
                 getDataLiveScore();
-            }else{
+            } else {
                 get_livescore_by_date(date);
             }
 
@@ -132,6 +154,7 @@ liveScoreData = new Vue({
 
 
 $(function () {
+
     $("#datepicker").datepicker({
         //beforeShow: addCustomInformation,
         onChangeMonthYear: function () {
@@ -158,7 +181,7 @@ $(function () {
             }
         }
     });
-    $('#listMenuSideBar ul li').click(function () {
+    $('#listMenuSideBar ul li:nth-child(-n+2)').click(function () {
         $('#listMenuSideBar ul li').removeClass('activeMenuSideBar');
         $(this).addClass('activeMenuSideBar');
     });
@@ -333,14 +356,17 @@ function resizeInputSearch() {
 }
 function checkBoxDontAskMe() {
     if ($("#ckdontask").prop("checked")) {
-        $("#ckdontask").prop("checked", false)
+        $("#ckdontask").prop("checked", false);
+        $('.btOptions[data-open-status="close"]').prop('disabled', false);
     } else {
-        $("#ckdontask").prop("checked", true)
+        $("#ckdontask").prop("checked", true);
+        $('.btOptions[data-open-status="close"]').prop('disabled', true)
     }
 }
 function responsive() {
     var browserWidth = $(window).width();
     var browserHeight = $(window).height();
+    //$('#listMenuSideBar').css('height', browserHeight - 205);
     $('#contentInPlayPreGame').css('height', browserHeight - 138);
     $('#contentLiveScores').css('height', browserHeight - 205);// set height for content live score
 
@@ -496,7 +522,7 @@ function btSearch(el) {
 }
 function shortTeamName() {
     if ($('.colInPlay').width() == 320) {
-        var teamName = $('.inPlayButton>div:nth-child(2) div[class="marquee"],.preGameButton>div:nth-child(2) div[class="marquee"],.expiredButton>div:nth-child(2) div[class="marquee"]');
+        var teamName = $('.inPlayButton>div:nth-child(2) div[class="marquee marquee-speed-fast marquee-direction-right"],.preGameButton>div:nth-child(2) div[class="marquee marquee-speed-fast marquee-direction-right"],.expiredButton>div:nth-child(2) div[class="marquee marquee-speed-fast marquee-direction-right"]');
         for (var j = 0; j < teamName.length; j++) {
             if ($(teamName[j]).attr('data-marquee').trim().length >= 13) {
                 $(teamName[j]).css('display', 'inline-block');
@@ -505,7 +531,7 @@ function shortTeamName() {
             }
         }
     } else {
-        var teamName = $('.inPlayButton>div:nth-child(2) div[class="marquee"],.preGameButton>div:nth-child(2) div[class="marquee"],.expiredButton>div:nth-child(2) div[class="marquee"]');
+        var teamName = $('.inPlayButton>div:nth-child(2) div[class="marquee marquee-speed-fast marquee-direction-right"],.preGameButton>div:nth-child(2) div[class="marquee marquee-speed-fast marquee-direction-right"],.expiredButton>div:nth-child(2) div[class="marquee marquee-speed-fast marquee-direction-right"]');
         for (var j = 0; j < teamName.length; j++) {
             $(teamName[j]).css('display', 'none');
             $($(teamName[j]).next()).css('display', 'none');
@@ -516,18 +542,20 @@ function shortTeamName() {
 function openMenuSideBar() {
     /*$('html').css('overflow-y', 'hidden');*/
     $('#menuSideBar').addClass('slide-in');
+    $('#contentMenuSideBar').addClass('slide-in');
+    $('#menuSideBar').fadeIn('slow');
 }
 
 function closeMenuSideBar() {
     /*$('html').css('overflow-y', 'auto');*/
-    $('#menuSideBar').removeClass('slide-in');
-    $('#menuSideBar').addClass('slide-out');
-
+    $('#contentMenuSideBar').removeClass('slide-in');
+    $('#contentMenuSideBar').addClass('slide-out');
+    $('#menuSideBar').fadeOut('slow');
 }
 
 function openAboutUs() {
     $('html').css('overflow-y', 'hidden');
-    $('#aboutUs').css('display', 'block');
+    $('#aboutUs').fadeIn('slow');
 }
 
 function openLogin(el) {
@@ -554,9 +582,7 @@ function loginGoogle() {
 }
 function closeNotification(divId) {
     $('html').css('overflow-y', 'auto');
-    $('#' + divId).fadeOut(100, function () {
-        $('#' + divId).css('display', 'none');
-    });
+    $('#' + divId).fadeOut(1000);
 }
 function openNotification(divid) {
     $('#' + divid).fadeIn(300);
@@ -600,11 +626,21 @@ function closeWindowLiveScoresDetail() {
     var browserWidth = $(window).width();
     $('html').css('overflow-y', 'auto');
     $('.mask').css('display', 'none');
-    $('#windowLiveScoresDetail').fadeOut('slow');
+    /*$('#windowLiveScoresDetail').fadeOut('slow');*/
     $('#colDetailLiveScores div[class="noMatch"]').css('display', 'block');
-    if (browserWidth < 672) {
-        $('#colDetailLiveScores').css('display', 'none');
-    }
+    $('#colDetailLiveScores').animate({right: '-900px'}, 700, function () {
+        $('#colDetailLiveScores').css({
+            display: 'none',
+            right: 0
+        });
+        $('#windowLiveScoresDetail').css('display', 'none');
+        if (browserWidth < 672) {
+            $('#colDetailLiveScores').css('display', 'none');
+        }
+    });
+    /*if (browserWidth < 672) {
+     $('#colDetailLiveScores').css('display', 'none');
+     }*/
     $('.listlivescores ul li').removeClass('selectedLiveScore');
 }
 
@@ -612,12 +648,18 @@ function closeWindowPreDetail() {
     var browserWidth = $(window).width();
     $('html').css('overflow-y', 'auto');
     $('#content div[class="mask"]').css('display', 'none');
-    $('#predictionDetail').fadeOut('slow');
-    $('#colDetail div[class="noMatch"]').css('display', 'block');
-    $('.footerDetail').css('display', 'none');
-    if (browserWidth < 672) {
+    $('#colDetail').animate({right:'-1000px'},700,function () {
+        /*$('#predictionDetail').fadeOut('slow');*/
+        $('#colDetail div[class="noMatch"]').css('display', 'block');
+        $('.footerDetail').css('display', 'none');
+        $('#colDetail').css('right',0);
+        if (browserWidth < 672) {
+            $('#colDetail').css('display', 'none');
+        }
+    });
+    /*if (browserWidth < 672) {
         $('#colDetail').css('display', 'none');
-    }
+    }*/
     $('.inPlayButton').removeClass('inPlayButtonSelected');
     $('.preGameButton').removeClass('preGameButtonSelected');
 }
@@ -643,7 +685,7 @@ function openLiveScoresDetail(obj) {
     }
     $('.listlivescores ul li').removeClass('selectedLiveScore');
     $(obj).addClass('selectedLiveScore');
-    $('#windowLiveScoresDetail').addClass('slide-in-right');
+    $('#colDetailLiveScores').addClass('slide-in-right');
 }
 function findTimeLineMatch(listMatch, matchId) {
     let result = [];
@@ -654,26 +696,34 @@ function findTimeLineMatch(listMatch, matchId) {
     }
     return result;
 }
-function openPredictionMatchDetail(el) {
+function openPredictionMatchDetail(el, inPlayOrPreGame) {
     var data;
     $('.inPlayButton').removeClass('inPlayButtonSelected');
     $('.preGameButton').removeClass('preGameButtonSelected');
-    if ($(el).hasClass('preGameButton')) {
-        data = predictionData.preGame.find(x => x.match_code == el.id);
+    if (inPlayOrPreGame == 'preGameButton') {
+        data = predictionData.preGame.find(x => x.match_code == el.getAttribute('data-match-id'));
         $('.hederDetailInPlay').css('background-image', 'url("Assets/bg_header_match_pregame_detail.png")');
         $('#predictionDetail button[class="inPlayButton"]').css('background-image', 'url("Assets/bg_pre_game_item@2x.png")');
-        $('#predictionDetail').attr('data-prediction','pregame');
-        $(el).addClass('preGameButtonSelected');
+        $('#predictionDetail').attr('data-prediction', 'pregame');
+        if (el.tagName == 'BUTTON') {
+            $(el).addClass('preGameButtonSelected');
+        } else {
+            $(el).find('button').addClass('preGameButtonSelected');
+        }
         $('.footerDetail').css({
             'background-image': 'url("Assets/bg_pre_game_item@2x.png")',
             'color': '#8EC89F'
         });
     } else {
-        data = predictionData.inPlay.find(x => x.match_code == el.id);
+        data = predictionData.inPlay.find(x => x.match_code == el.getAttribute('data-match-id'));
         $('.hederDetailInPlay').css('background-image', 'url("Assets/bg_header_match_detail.png")');
         $('#predictionDetail button[class="inPlayButton"]').css('background-image', 'url("Assets/bg_in_play_item@1x.png")');
-        $('#predictionDetail').attr('data-prediction','inplay');
-        $(el).addClass('inPlayButtonSelected');
+        $('#predictionDetail').attr('data-prediction', 'inplay');
+        if (el.tagName == 'BUTTON') {
+            $(el).addClass('inPlayButtonSelected');
+        } else {
+            $(el).find('button').addClass('inPlayButtonSelected');
+        }
         $('.footerDetail').css({
             'background-image': 'url("Assets/bg_in_play_item@1x.png")',
             'color': '#F3AC9B'
@@ -683,8 +733,10 @@ function openPredictionMatchDetail(el) {
     $('#colDetail').css('display', 'block');
     $('.footerDetail').css('display', 'block');
     $('#content div[class="mask"]').removeAttr("style");
+
     $('#colDetail div[class="noMatch"]').hide();
     $('#predictionDetail').css('display', 'block');
+
     if ($('#content div[class="mask"]').is(':hidden')) {
         $('html').css('overflow-y', 'auto');
     } else {
@@ -712,6 +764,7 @@ function openTabMenu(menuId) {
         let outer = $('#calendar ul').width();
         let inner = $('#calendar').get(0).scrollWidth;
         $('#calendar').scrollLeft(((inner - outer) / 2) + 95);
+        closeWindowPreDetail();
     }
 }
 function getDateOfMoth() {
@@ -782,10 +835,10 @@ function clearText() {
 }
 
 function openNewTab() {
-    newWindow=window.open('detailprediction.html','_blank');
-    newWindow.predetaildata={
-        'data':predictionData.$refs.predictiondetail.$data.dataDetail,
-        'prediction':$('#predictionDetail').attr('data-prediction')
+    newWindow = window.open('detailprediction.html', '_blank');
+    newWindow.predetaildata = {
+        'data': predictionData.$refs.predictiondetail.$data.dataDetail,
+        'prediction': $('#predictionDetail').attr('data-prediction')
     };
     closeNotification('openNewTab');
 }

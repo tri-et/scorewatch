@@ -6,12 +6,66 @@ body {
     overflow-y: hidden !important;
     overflow-x: hidden;
 }*/
+#badgeinplay:hover{
+    background-color: rgba(0,0,0,0.1) !important;
+}
+#badgepregame:hover{
+    background-color: rgba(0,0,0,0.1) !important;
+}
 .score-col{
     float: left;width: 100%
 }
 .score-row{
     /*display: table;
     clear: both;*/
+}
+.example1 {
+    height: 45px;
+    overflow: hidden;
+    width:100%;
+}
+.example1 p {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    /* Starting position */
+    -moz-transform:translateX(100%);
+    -webkit-transform:translateX(100%);
+    transform:translateX(100%);
+    /* Apply animation to this element */
+    -moz-animation: example1 10s linear infinite;
+    -webkit-animation: example1 10s linear infinite;
+    animation: example1 10s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes example1 {
+    0%   { -moz-transform: translateX(100%); }
+    100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes example1 {
+    0%   { -webkit-transform: translateX(100%); }
+    100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes example1 {
+    0%   {
+        -moz-transform: translateX(100%); /* Firefox bug fix */
+        -webkit-transform: translateX(100%); /* Firefox bug fix */
+        transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%); /* Firefox bug fix */
+        -webkit-transform: translateX(-100%); /* Firefox bug fix */
+        transform: translateX(-100%);
+    }
+}
+
+@-moz-keyframes marquee {
+    0%   { -moz-transform: translateX(100%); }
+    100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes marquee {
+    0%   { -webkit-transform: translateX(100%); }
+    100% { -webkit-transform: translateX(-100%); }
 }
 .mainMenu {
     height: 64px;
@@ -134,7 +188,7 @@ body {
     font-size: 14px;
     color: #8B9EC6;
     text-align: center;
-    width: 100%;
+    width: 360px;
     padding: 15px;
 }
 
@@ -388,6 +442,7 @@ body {
     color: #fff;
     padding-left: 24px;
     padding-top: 13px;
+    margin-top: 7px;
 }
 
 .liveScoreTextBold {
@@ -442,6 +497,7 @@ body {
     background-color: #fff;
     outline: none;
     font-weight: bold;
+    cursor: pointer;
 }
 .btOptions:hover{
     color: #577DBB;
@@ -486,6 +542,8 @@ body {
 .aboutContent::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
     background-color: #F1F1F1;
+    outline: none;
+    border: none;
 }
 
 .aboutContent::-webkit-scrollbar-thumb {
@@ -1028,18 +1086,19 @@ body {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: auto;
-    background-color: #ccc;
+    background-color: rgba(0,0,0,0.6);
     color: #fff;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 2px;
     position: absolute;
     top: 40px;
     margin-left: -60px;
     opacity: 0;
     transition: opacity 1s;
-    padding: 8px;
+    padding: 4px 8px;
     text-transform: none;
     display: block !important;
+    font-weight: normal;
 }
 
 .tooltip .tooltiptext::after {
@@ -1252,7 +1311,7 @@ body {
     }
 
     .colInPlay, .colPreGame {
-        max-width: 480px;
+        max-width: 100%;
         margin: 0px;
     }
     .preGameButtonSelected {
@@ -1271,7 +1330,7 @@ body {
     }
 
     #center, #centerLiveScores {
-        width: 320px;
+        width: 100%;
         margin: auto;
     }
 }
@@ -1300,7 +1359,7 @@ body {
     .colInPlay, .colPreGame {
         max-width: 480px;
         margin-top: 16px;
-        margin-left: 16px;
+        /*margin-left: 16px;*/
     }
     .preGameButtonSelected {
         background-image: url(../Assets/bg_pre_game_item_selected@2x.png);
@@ -1347,9 +1406,9 @@ body {
     }
 
     .colInPlay, .colPreGame {
-        max-width: 320px;
+        max-width: 100%;
         margin-top: 16px;
-        margin-left: 16px;
+        /*margin-left: 16px;*/
     }
     .preGameButtonSelected {
         background-image: url(../Assets/bg_pre_game_item_selected@1x.png);
@@ -1367,7 +1426,7 @@ body {
     }
 
     #center, #centerLiveScores {
-        width: min-content;
+        width: 100%;
         margin: auto;
     }
 
@@ -1491,9 +1550,10 @@ body {
     }
 
     .colInPlay, .colPreGame {
-        max-width: 320px;
+        /*max-width: 320px;*/
+        max-width: 100%;
         margin-top: 16px;
-        margin-left: 16px;
+        /*margin-left: 16px;*/
     }
     .preGameButtonSelected {
         background-image: url(../Assets/bg_pre_game_item_selected@1x.png);
@@ -1518,7 +1578,7 @@ body {
     }
 
     #center, #centerLiveScores {
-        width: min-content;
+        width: 100%;
         margin: auto;
     }
 

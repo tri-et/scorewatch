@@ -1,4 +1,4 @@
-<!-- Version: 0.0.5 -->
+<!-- Version: 0.0.7 -->
 <!DOCTYPE html>
 <html>
 <title>Score Watch</title>
@@ -31,8 +31,8 @@
                         <img src="Assets/menu_predictions@1x.png" width="30" height="32">
                     </span>
                     <span class="activeMenu">predictions</span>
-                    <span class="w3-tag news" style="background-color: #FF785A;">99+ New</span>
-                    <span class="w3-tag news" style="background-color: #36CC64;">99+ New</span>
+                    <span class="w3-tag news" id="badgeinplay" style="background-color: #FF785A;display: none"></span>
+                    <span class="w3-tag news" id="badgepregame" style="background-color: #36CC64;display: none"></span>
                     <br>
                     <div style="height: 5px"></div>
                     <hr class="activeMenu"/>
@@ -44,7 +44,8 @@
                     <span><img src="Assets/menu_livescores@1x.png" width="32" height="22"
                                style="margin-top: 4px;"></span>
                     <span>live scores</span>
-                    <span class="w3-tag news" style="background-color: #36CC64;">99+ New</span>
+                    <span class="w3-tag news" id="badgelivescore"
+                          style="background-color: #36CC64;display: none"></span>
                     <br>
                     <div style="height: 5px;width: 237px"></div>
                     <hr>
@@ -75,7 +76,7 @@
                     <span class="clear-fix"></span>
                 </a>
             </li>
-            <li class="menuRight">
+            <li class="menuRight" style="box-shadow: none">
                 <a href="#predictions" onclick="openLogin(this)" title="login" class="tooltip">
                     <span><img src="Assets/menu_login@1x.png" width="29" height="32"></span>
                     <span class="txtRightMenu">login</span>
@@ -83,18 +84,13 @@
                     <span class="clear-fix"></span>
                 </a>
             </li>
-            <!--<li style="position: relative;display: none" id="inputSearch">
-                <input type="text" placeholder="Search here"
-                       style="color:#ccc;box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);border: none;height: 37px;width: 0px;">
-                <span class="clearText" onclick="clearText()"> &times</span>
-            </li>-->
+            <!--
             <li class="menuRight" id="btSearch" style="box-shadow: none;" onclick="btSearch(this)" title="hide">
                 <a href="#predictions" style="padding-bottom: 13px!important;" class="tooltip">
                     <i class="material-icons" style="color: #36569B;font-size: 32px !important;">search</i>
                     <span class="tooltiptext">Search</span>
                 </a>
-            </li>
-
+            </li>-->
         </ul>
         <div id="searchDiv">
             <i onclick="backSearch(this)" class="material-icons"
@@ -116,8 +112,9 @@
                                 <span style="line-height: 5;color: #909090;font-size: 16px;">No In-Play Predictions for today</span>
                             </div>
                             <div id="inplay">
-                                <div class="w3-row" v-for="(item,index) in inPlay" style="padding: 6px 5px 6px 5px">
-                                    <div class="match">
+                                <div class="w3-row" v-for="(item,index) in inPlay" style="padding: 6px 5px 6px 5px;">
+                                    <div class="match" style="cursor: pointer" :data-match-id="item.match_code"
+                                         onclick="openPredictionMatchDetail(this,'inPlayButton')">
                                         <div class="w3-row" style="color: black;padding-bottom: 3px;">
                                             <div class="w3-col timeInPlay" style="width:17%">{{item.match_dt|matchDate}}
                                             </div>
@@ -136,7 +133,8 @@
                                             </div>
                                         </div>
                                         <div class="w3-row">
-                                            <button class="inPlayButton" onclick="openPredictionMatchDetail(this)"
+                                            <button class="inPlayButton" :data-match-id="item.match_code"
+                                                    click="openPredictionMatchDetail(this,'inPlayButton')"
                                                     :id="item.match_code">
                                                 <div class="w3-col"
                                                      style="width:14%;text-align: left;padding-left: 5px">
@@ -144,7 +142,7 @@
                                                          style="margin-bottom: -4px;">
                                                 </div>
                                                 <div class="w3-col" style="width:66%;text-align: left;">
-                                                    <div class="marquee"
+                                                    <div class="marquee marquee-speed-fast marquee-direction-right"
                                                          v-show="(colWidth==320)&&item.team_home.length>=13"
                                                          :style="{width:setWidth(item.team_home)}"
                                                          :data-marquee="item.team_home"
@@ -184,7 +182,8 @@
                             </div>
                             <div id="pregame">
                                 <div class="w3-row" v-for="(item,index) in preGame" style="padding: 6px 5px 6px 5px">
-                                    <div class="match">
+                                    <div class="match" style="cursor: pointer" :data-match-id="item.match_code"
+                                         onclick="openPredictionMatchDetail(this,'preGameButton')">
                                         <div class="w3-row" style="color: black;padding-bottom: 3px;">
                                             <div class="w3-col timeInPlay" style="width:17%">{{item.match_dt|matchDate}}
                                             </div>
@@ -203,15 +202,15 @@
                                             </div>
                                         </div>
                                         <div class="w3-row">
-                                            <button class="preGameButton" onclick="openPredictionMatchDetail(this)"
-                                                    :id="item.match_code">
+                                            <button class="preGameButton" :data-match-id="item.match_code"
+                                                    onclick="openPredictionMatchDetail(this,'preGameButton')">
                                                 <div class="w3-col"
                                                      style="width:14%;text-align: left;padding-left: 5px">
                                                     <img src="Assets/icon_tick@1x.png" width="15"
                                                          style="margin-bottom: -4px;">
                                                 </div>
                                                 <div class="w3-col" style="width:66%;text-align: left;">
-                                                    <div class="marquee"
+                                                    <div class="marquee marquee-speed-fast marquee-direction-right"
                                                          v-show="(colWidth==320)&&item.team_home.length>=13"
                                                          :style="{width:setWidth(item.team_home)}"
                                                          :data-marquee="item.team_home"
@@ -253,8 +252,11 @@
             </div>
             <div id="colDetail" class="w3-col" style="height: auto">
                 <div class="noMatch" style="width: 100%;height: -webkit-fill-available;position: relative">
-                    <img src="Assets/noMatch.png"
-                         style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;">
+                    <div style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;height:238px;text-align: center">
+                        <span style="color: #A8A8A8;font-size: 14px;font-weight: bold;">NO MATCH SELECTED</span></br>
+                        <img src="Assets/noMatch.png"></br>
+                        <span style="color: #A8A8A8">Select a match from the left to see its details here!</span>
+                    </div>
                 </div>
                 <predictiondetail ref="predictiondetail"></predictiondetail>
             </div>
@@ -264,28 +266,35 @@
             <div style="width: 100%;position: relative;padding-bottom: 74px;">
                 <div style="height: 60px;width: 100%;font-size: 12px;display: inline-flex;">
                     <div style="width: 30px;height: 60px">
-                        <i class="material-icons" onclick="next_day()" style="font-size:30px;color:#38619E;position: absolute;left: 0;top: 21px;cursor: pointer;">keyboard_arrow_left</i>
+                        <i class="material-icons" onclick="next_day()"
+                           style="font-size:30px;color:#38619E;position: absolute;left: 0;top: 21px;cursor: pointer;">keyboard_arrow_left</i>
                     </div>
-                    <div id="calendar"  style="flex: 1;height: 60px;overflow-x: hidden;position: relative">
+                    <div id="calendar" style="flex: 1;height: 60px;overflow-x: hidden;position: relative">
                         <ul style="list-style: none;padding: 9px 0px 0px 0px;margin: 0;height: 60px;white-space: nowrap;width: 100%;position: absolute">
-                            <li v-for="item in dateOfMonth" style="padding: 0px 15px 0px 15px;display: inline-block;text-align: center;cursor: pointer"  @click="setActiveCalendar(item.year,item.month,item.date,$event)">
-                                <span style="font-size: 16px" :style="{'font-weight':(item.dayName=='Today'?'bold':'normal'),'color':(item.dayName=='Today'?'#38619E':'#C2CFE1')}">{{item.monthName+'-'+item.date}}</span><br>
+                            <li v-for="item in dateOfMonth"
+                                style="padding: 0px 15px 0px 15px;display: inline-block;text-align: center;cursor: pointer"
+                                @click="setActiveCalendar(item.year,item.month,item.date,$event)">
+                                <span style="font-size: 16px"
+                                      :style="{'font-weight':(item.dayName=='Today'?'bold':'normal'),'color':(item.dayName=='Today'?'#38619E':'#C2CFE1')}">{{item.monthName+'-'+item.date}}</span><br>
                                 <span style="color:#C2CFE1;font-size: 12px">{{item.dayName}}</span>
                             </li>
                         </ul>
                     </div>
                     <div style="width: 30px;height: 60px">
-                        <i class="material-icons" onclick="pre_day()" style="font-size:30px;color:#38619E;position: absolute;right: 0;top: 21px;cursor: pointer;">keyboard_arrow_right</i>
+                        <i class="material-icons" onclick="pre_day()"
+                           style="font-size:30px;color:#38619E;position: absolute;right: 0;top: 21px;cursor: pointer;">keyboard_arrow_right</i>
                     </div>
                 </div>
                 <div id="contentLiveScores" class="w3-row" style="flex: 1">
-                    <div v-show="league.length==0" style="text-align: center;font-size: 30px;font-weight: bold;top: 0;bottom: 0;left: 0;margin: auto;position: absolute;right: 0;height: 30px;color: #A6A6A6;">
+                    <div v-show="league.length==0"
+                         style="text-align: center;font-size: 30px;font-weight: bold;top: 0;bottom: 0;left: 0;margin: auto;position: absolute;right: 0;height: 30px;color: #A6A6A6;">
                         <span>NO MATCHES</span>
                     </div>
                     <div id="centerLiveScores">
-                        <div class="w3-col colInPlay">
+                        <div class="w3-col colInPlay" style="margin-top: 0px">
                             <template v-for="item in league">
-                                <div class="headerLiveScores">
+                                <div class="headerLiveScores"
+                                     style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden">
                                     <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
                                     <span>{{item}}</span>
                                 </div>
@@ -332,9 +341,11 @@
                                 </div>
                             </template>
                         </div>
-                        <div class="w3-col colPreGame">
+                        <div class="w3-col colPreGame"
+                             style="margin-top: 0px;">
                             <template v-for="item in leagueCol2">
-                                <div class="headerLiveScores">
+                                <div class="headerLiveScores"
+                                     style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden">
                                     <img src="Assets/menu_livescores@1x.png" style="float: left;margin-right: 24px">
                                     <span>{{item}}</span>
                                 </div>
@@ -388,9 +399,10 @@
                 </div>
             </div>
             <div id="colDetailLiveScores" class="w3-col" style="background-color: #fff;">
-                <div class="noMatch" style="width: 100%;height: -webkit-fill-available;position: relative"><img
-                        src="Assets/noMatch.png"
-                        style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;">
+                <div style="margin: auto;top: 0;bottom: 0;right: 0;position: absolute; left: 0;height:238px;text-align: center">
+                    <span style="color: #A8A8A8;font-size: 14px;font-weight: bold;">NO MATCH SELECTED</span></br>
+                    <img src="Assets/noMatch.png"></br>
+                    <span style="color: #A8A8A8">Select a match from the left to see its details here!</span>
                 </div>
                 <livescoredetail>
                     <template scope="{msg}">
@@ -405,7 +417,7 @@
     <div id="windowLogin" onclick="closeNotification('windowLogin');">
         <div id="login" class="bgMenuSideBar" onclick="event.cancelBubble=true;">
             <div style="position: relative;margin-bottom: 15px;background-color: #fff;box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.1);">
-                <img src="Assets/logo@1x.png" width="293" height="92" style="margin-top: 22px">
+                <img src="Assets/logo@2x.png" width="293" height="92" style="margin-top: 22px">
                 <a class="btnClose" onclick="closeLogin();">&times</a>
             </div>
             <div class="titleLogin">
@@ -414,65 +426,67 @@
             <div id="loginRules">
                 <ul>
                     <li>
-                        <div style="display: table-cell;vertical-align: middle">
+                        <div>
                             <img src="Assets/icon_login_notification.png" class="w3-left w3-circle w3-margin-right"
-                                 style="width:50px">
+                                 style="width:50px;margin-top: 5px">
                         </div>
-                        <div style="display: table-cell">
-                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Instant Notifications</span>
-                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                        <div>
+                            <span style="color:#6A6A6A;font-size: 14px;font-weight: bold">Instant Notifications</span></br>
+                            <span style="font-size: 12px;color:#A4A4A4; ">
                                 Get notified about updates to match statistics or predicted outcomes with in-browser
                                 notifications!
-                            </p>
+                            </span>
                         </div>
                     </li>
                     <li>
-                        <div style="display: table-cell;vertical-align: middle">
+                        <div>
                             <img src="Assets/icon_login_credits.png" class="w3-left w3-circle w3-margin-right"
-                                 style="width:50px">
+                                 style="width:50px;margin-top: 5px">
                         </div>
-                        <div style="display: table-cell">
-                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Get Prediction Credits!</span>
-                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                        <div>
+                            <span style="color:#6A6A6A;font-size: 14px;font-weight: bold">Get Prediction Credits!</span></br>
+                            <span style="font-size: 12px;color:#A4A4A4; ">
                                 Manage your Prediction Credits balance and get the insights you need on the latest
                                 matches!
-                            </p>
+                            </span>
                         </div>
                     </li>
                     <li>
-                        <div style="display: table-cell;vertical-align: middle">
+                        <div>
                             <img src="Assets/icon_login_sync.png" class="w3-left w3-circle w3-margin-right"
-                                 style="width:50px">
+                                 style="width:50px;margin-top: 5px">
                         </div>
-                        <div style="display: table-cell">
-                            <span style="color:#6A6A6A;font-size: 12px;font-weight: bold">Keep settings synced across devices</span>
-                            <p style="line-height: 1.2;font-size: 12px;color:#A4A4A4; ">
+                        <div>
+                            <span style="color:#6A6A6A;font-size: 14px;font-weight: bold">Keep settings synced across devices</span></br>
+                            <span style="font-size: 12px;color:#A4A4A4; ">
                                 Login and access the ScoreWatch system from multiple devices, and keep all your settings
                                 & preferences in sync!
-                            </p>
+                            </span>
                         </div>
                     </li>
                 </ul>
             </div>
             <div style="text-align: center;padding: 40px" id="groupButtonLogin">
                 <button class="w3-button" onclick="loginFaceBook()"
-                        style="background-color: #fff;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%;margin-bottom: 15px">
-                    <div style="float: left;padding-top: 6px;color:#3C5A98;"><span>LOGIN WITH FACEBOOK</span></div>
+                        style="background-color: #475993;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%;margin-bottom: 15px;padding-top: 10px;height: 51px">
+                    <div style="float: left;padding-top: 8px;color:#fff;"><span>LOGIN WITH FACEBOOK</span></div>
                     <div style="float: right">
-                        <img src="Assets/icon_fb.png">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 266.893 266.895">
+                            <path d="M252.164 266.895c8.134 0 14.729-6.596 14.729-14.73V14.73c0-8.137-6.596-14.73-14.729-14.73H14.73C6.593 0 0 6.594 0 14.73v237.434c0 8.135 6.593 14.73 14.73 14.73h237.434z" fill="#fff"/><path d="M184.152 266.895V163.539h34.692l5.194-40.28h-39.887V97.542c0-11.662 3.238-19.609 19.962-19.609l21.329-.01V41.897c-3.689-.49-16.351-1.587-31.08-1.587-30.753 0-51.807 18.771-51.807 53.244v29.705h-34.781v40.28h34.781v103.355h41.597z" fill="#485a96"/></svg>
                     </div>
                 </button>
                 <button onclick="loginGoogle()" class="w3-button"
-                        style="background-color: #fff;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%">
-                    <div style="float: left;padding-top: 6px;color: #DE584C"><span>LOGIN WITH GOOGLE</span></div>
+                        style="background-color: #F34A38;border-radius: 4px;font-size: 12px;font-weight: bold;width: 100%;height: 51px;padding-right: 6px;padding-top: 1px">
+                    <div style="float: left;padding-top: 16px;color: #fff"><span>LOGIN WITH GOOGLE</span></div>
                     <div style="float: right">
-                        <img src="Assets/icon_google.png">
+                        <svg width="50" height="50" enable-background="new 0 0 512 512" id="Layer_1" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                            <rect xmlns="http://www.w3.org/2000/svg" fill="transparent" width="100%" height="100%"/><g>
+                            <path d="M197.4,277.3h64.9c-8.5,29.1-33.9,49.7-64.9,49.7c-39.2,0-71-31.9-71-71c0-39.2,31.9-71,71-71   c16.9,0,33.3,6,46.2,17l28-32.7c-20.6-17.6-47-27.4-74.1-27.4c-62.9,0-114.1,51.2-114.1,114.1s51.2,114.1,114.1,114.1   c62.2,0,110.9-50.1,110.9-114.1v-16.5h-111V277.3z M396.9,239.7v-31.6h-32.7v31.6h-31.6v32.7h31.6v31.7h32.7v-31.7h31.7v-32.7   H396.9z" fill="#FFFFFF"/></g></svg>
                     </div>
                 </button>
             </div>
             <div class="footerLogin">
-                <span>We don't post to social media without your consent</span><br>
-                <span>Red our Privacy Policy here</span>
+                <span>We don't post to social media without your consent</span>
             </div>
 
         </div>
@@ -603,7 +617,7 @@
             </div>
             <div class="w3-row" style="border-top: 1px solid #F0F0F0;height: 51px">
                 <div class="w3-col" style="width: 50%;height:100%;border-right: 1px solid #F0F0F0">
-                    <button onclick="closeNotification('openNewTab');" class="btOptions"
+                    <button data-open-status="close" onclick="closeNotification('openNewTab');" class="btOptions"
                             style="border-bottom-left-radius: 4px;">
                         DON'T OPEN
                     </button>
@@ -1032,7 +1046,7 @@
     </div>
 </div>
 <div id="menuSideBar" class="sideBar" onclick="closeMenuSideBar();">
-    <div style="background-color: #fff;max-width: 360px;height: 100%;" class="bgMenuSideBar"
+    <div id="contentMenuSideBar" style="background-color: #fff;max-width: 360px;height: 100%;" class="bgMenuSideBar"
          onclick="event.cancelBubble=true;">
         <div style="position: relative;margin-bottom: 15px;background-color: #fff">
             <img src="Assets/logo@1x.png" width="293" height="92" style="margin-top: 22px">
